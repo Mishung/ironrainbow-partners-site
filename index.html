@@ -78,17 +78,14 @@
       gap: 12px;
       text-decoration: none;
     }
-    .site-header-logo img {
+    .site-header-logo img.logo-icon {
       height: 40px;
       width: auto;
     }
-    .site-header-logo-text {
-      font-weight: 800;
-      font-size: 1.5rem;
-      color: var(--text-color-primary);
-      text-decoration: none;
+    .site-header-logo img.logo-text {
+      height: 28px;
+      width: auto;
     }
-    .site-header-logo-text span { color: var(--color-primary); }
     .site-desktop-links {
       display: flex;
       align-items: center;
@@ -403,8 +400,8 @@
   <header class="site-header-container">
     <div class="site-header-inner">
       <a href="/" class="site-header-logo">
-        <img src="logo/logo-good-size.png" alt="Iron Rainbow">
-        <span class="site-header-logo-text">Iron<span>Rainbow</span></span>
+        <img src="logo/logo-good-size.png" alt="Iron Rainbow" class="logo-icon">
+        <img src="logo/text-horizontal.svg" alt="Iron Rainbow" class="logo-text">
       </a>
       <nav class="site-desktop-links">
         <a href="#how-it-works">How It Works</a>
