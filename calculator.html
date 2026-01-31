@@ -5,20 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Partner ROI Calculator - Iron Rainbow</title>
   <meta name="description" content="Calculate your potential return on investment as an Iron Rainbow powder coating partner.">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌈</text></svg>">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon/32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon/16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon/180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="favicon/192x192.png">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
       --gold: #ffd60a;
-      --gold-dim: #b39700;
-      --bg-1: #1a1a2e;
-      --bg-2: #16213e;
-      --bg-3: #1f2b47;
-      --bg-4: #2a3a5a;
+      --gold-dim: #e6c109;
+      --bg-1: #1a1a1a;
+      --bg-2: #2a2a2a;
+      --bg-3: #3a3a3a;
+      --bg-4: #4a4a4a;
       --text-1: #ffffff;
-      --text-2: #a0a0a0;
-      --text-3: #606060;
+      --text-2: hsla(0, 0%, 80%, 1);
+      --text-3: hsla(0, 0%, 60%, 1);
       --green: #4ade80;
       --red: #f87171;
       --blue: #60a5fa;
@@ -28,8 +33,8 @@
     }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: linear-gradient(135deg, var(--bg-1) 0%, var(--bg-2) 100%);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background-color: var(--bg-1);
       color: var(--text-1);
       min-height: 100vh;
       line-height: 1.5;
@@ -37,11 +42,17 @@
 
     /* Header */
     .header {
-      padding: 20px 32px;
+      background: linear-gradient(135deg, #333 0%, #2a2a2a 50%, #1a1a1a 100%);
+      border-bottom: 2px solid var(--gold);
+      padding: 16px 32px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 1px solid var(--border);
+      box-shadow: 0 4px 20px rgba(246, 213, 92, 0.3);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(10px);
     }
 
     .header-brand {
@@ -53,15 +64,17 @@
     }
 
     .header-brand .logo {
-      font-size: 28px;
+      height: 40px;
+      width: auto;
     }
 
     .header-brand h1 {
-      font-size: 1.25rem;
-      background: linear-gradient(90deg, var(--gold), #ff9500);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      font-size: 1.5rem;
+      font-weight: 800;
+    }
+
+    .header-brand h1 span {
+      color: var(--gold);
     }
 
     .header-actions {
@@ -630,8 +643,9 @@
 
     /* Footer */
     .footer {
+      background: var(--bg-2);
       text-align: center;
-      padding: 40px 20px;
+      padding: 48px 20px 32px;
       color: var(--text-3);
       font-size: 0.85rem;
       border-top: 1px solid var(--border);
@@ -639,12 +653,13 @@
     }
 
     .footer a {
-      color: var(--gold);
+      color: var(--text-2);
       text-decoration: none;
+      transition: color 0.2s;
     }
 
     .footer a:hover {
-      text-decoration: underline;
+      color: var(--gold);
     }
   </style>
 </head>
@@ -652,8 +667,8 @@
   <!-- Header -->
   <header class="header">
     <a href="/" class="header-brand">
-      <span class="logo">🌈</span>
-      <h1>Iron Rainbow</h1>
+      <img src="logo/logo-good-size.png" alt="Iron Rainbow" class="logo">
+      <h1>Iron<span>Rainbow</span></h1>
     </a>
     <div class="header-actions">
       <button class="btn btn-secondary" onclick="openShareModal()">
@@ -1053,10 +1068,11 @@
 
   <!-- Footer -->
   <footer class="footer">
-    <p>&copy; 2025 Iron Rainbow. All rights reserved.</p>
     <p>
-      <a href="https://ironrainbow.com">ironrainbow.com</a> · San Diego, California
+      <a href="https://ironrainbow.com">ironrainbow.com</a> ·
+      <a href="mailto:partners@ironrainbow.com">partners@ironrainbow.com</a>
     </p>
+    <p style="margin-top: 8px;">&copy; 2025 Iron Rainbow. All rights reserved. · San Diego, California</p>
   </footer>
 
   <!-- Share Modal -->

@@ -5,452 +5,526 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Iron Rainbow Partner Network - Powder Coating Partners</title>
   <meta name="description" content="Join Iron Rainbow's network of powder coating professionals. Receive qualified customers, grow your business, and earn 80% of every order.">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌈</text></svg>">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon/32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon/16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon/180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="favicon/192x192.png">
+
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    /* === IRON RAINBOW DESIGN SYSTEM === */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --gold: #ffd60a;
-      --gold-dim: #ff9500;
-      --bg-1: #1a1a2e;
-      --bg-2: #16213e;
-      --text-1: #ffffff;
-      --text-2: #a0a0a0;
+      --color-primary: #ffd60a;
+      --color-primary-hover: #e6c109;
+      --bg-color-1: #1a1a1a;
+      --bg-color-2: #2a2a2a;
+      --bg-color-3: #3a3a3a;
+      --text-color-primary: hsla(0, 0%, 100%, 1);
+      --text-color-secondary: hsla(0, 0%, 80%, 1);
+      --text-color-tertiary: hsla(0, 0%, 60%, 1);
+      --font-size-s: 1rem;
+      --font-size-m: 1.125rem;
+      --font-size-l: 1.25rem;
+      --font-size-xl: 1.5rem;
+      --font-size-2xl: 1.75rem;
+      --font-size-3xl: 2rem;
+      --font-size-4xl: 2.5rem;
+      --ir-border: rgba(255, 255, 255, 0.1);
+      --ir-card-bg: rgba(255, 255, 255, 0.05);
+      --ir-card-bg-hover: rgba(255, 255, 255, 0.08);
+      --header-height: 80px;
+      --ir-page-max-width: 1400px;
+      --ir-page-horz-padding: 32px;
+      --border-radius-m: 12px;
       --green: #4ade80;
-      --border: rgba(255, 255, 255, 0.1);
     }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-      background: linear-gradient(135deg, var(--bg-1) 0%, var(--bg-2) 100%);
-      min-height: 100vh;
-      color: var(--text-1);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background-color: var(--bg-color-1);
+      color: var(--text-color-primary);
+      font-size: var(--font-size-s);
+      line-height: 1.5;
     }
 
-    /* Header */
-    .header {
-      padding: 20px 40px;
+    /* === HEADER === */
+    .site-header-container {
+      background: linear-gradient(135deg, #333 0%, #2a2a2a 50%, #1a1a1a 100%);
+      border-bottom: 2px solid var(--color-primary);
+      height: var(--header-height);
+      padding: 16px 32px;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      border-bottom: 1px solid var(--border);
+      justify-content: center;
+      box-shadow: 0 4px 20px rgba(246, 213, 92, 0.3);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(10px);
     }
-
-    .header-brand {
+    .site-header-inner {
+      max-width: var(--ir-page-max-width);
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .site-header-logo {
       display: flex;
       align-items: center;
       gap: 12px;
-    }
-
-    .header-brand .logo {
-      font-size: 32px;
-    }
-
-    .header-brand h1 {
-      font-size: 1.5rem;
-      background: linear-gradient(90deg, var(--gold), var(--gold-dim));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .header-nav {
-      display: flex;
-      gap: 24px;
-      align-items: center;
-    }
-
-    .header-nav a {
-      color: var(--text-2);
       text-decoration: none;
-      font-size: 0.95rem;
+    }
+    .site-header-logo img {
+      height: 40px;
+      width: auto;
+    }
+    .site-header-logo-text {
+      font-weight: 800;
+      font-size: 1.5rem;
+      color: var(--text-color-primary);
+      text-decoration: none;
+    }
+    .site-header-logo-text span { color: var(--color-primary); }
+    .site-desktop-links {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    .site-desktop-links a {
+      color: var(--text-color-secondary);
+      text-decoration: none;
+      font-size: var(--font-size-s);
+      font-weight: 500;
       transition: color 0.2s;
     }
+    .site-desktop-links a:hover { color: var(--text-color-primary); }
 
-    .header-nav a:hover {
-      color: var(--text-1);
-    }
-
-    .btn {
-      padding: 12px 24px;
-      border-radius: 8px;
-      font-size: 0.95rem;
+    /* === BUTTONS === */
+    .site-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 16px 32px;
+      font-size: var(--font-size-m);
       font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s;
+      border-radius: 8px;
       text-decoration: none;
+      transition: all 0.3s ease;
       border: none;
+      cursor: pointer;
+      font-family: inherit;
     }
-
-    .btn-primary {
-      background: linear-gradient(90deg, var(--gold), var(--gold-dim));
-      color: var(--bg-1);
+    .site-btn--primary {
+      background: var(--color-primary);
+      color: black;
     }
-
-    .btn-primary:hover {
+    .site-btn--primary:hover {
+      background: var(--color-primary-hover);
       transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(255, 214, 10, 0.3);
+      box-shadow: 0 10px 40px rgba(255, 214, 10, 0.3);
+    }
+    .site-btn--secondary {
+      background: transparent;
+      border: 1px solid var(--ir-border);
+      color: var(--text-color-primary);
+    }
+    .site-btn--secondary:hover {
+      background: var(--ir-card-bg);
+      border-color: var(--text-color-secondary);
+    }
+    .site-btn--small {
+      padding: 12px 24px;
+      font-size: var(--font-size-s);
     }
 
-    /* Hero */
-    .hero {
-      padding: 80px 40px 60px;
+    /* === HERO === */
+    .site-hero {
+      padding: 80px var(--ir-page-horz-padding) 48px;
       text-align: center;
-      max-width: 900px;
-      margin: 0 auto;
+      background: radial-gradient(ellipse at center, #ffb80014 0%, transparent 70%);
     }
-
-    .hero h2 {
-      font-size: 3rem;
+    .site-hero__container { max-width: 900px; margin: 0 auto; }
+    .site-hero__badge {
+      display: inline-block;
+      padding: 8px 16px;
+      background: var(--color-primary);
+      color: var(--bg-color-1);
+      border-radius: 20px;
+      font-size: var(--font-size-s);
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+    .site-hero__headline {
+      font-size: var(--font-size-4xl);
+      font-weight: 600;
       line-height: 1.2;
       margin-bottom: 24px;
     }
-
-    .hero h2 span {
-      background: linear-gradient(90deg, var(--gold), var(--gold-dim));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+    .site-hero__headline span {
+      color: var(--color-primary);
     }
-
-    .hero p {
-      font-size: 1.25rem;
-      color: var(--text-2);
-      line-height: 1.7;
+    .site-hero__subheadline {
+      font-size: var(--font-size-l);
+      color: var(--text-color-secondary);
+      line-height: 1.6;
       margin-bottom: 40px;
     }
-
-    .hero-cta {
+    .site-hero__cta {
       display: flex;
       gap: 16px;
       justify-content: center;
       flex-wrap: wrap;
     }
 
-    .btn-secondary {
-      background: transparent;
-      border: 1px solid var(--border);
-      color: var(--text-1);
-    }
-
-    .btn-secondary:hover {
-      background: rgba(255, 255, 255, 0.05);
-      border-color: var(--text-2);
-    }
-
-    /* Stats */
-    .stats {
+    /* === STATS === */
+    .site-stats {
       display: flex;
       justify-content: center;
       gap: 60px;
       padding: 40px 20px;
       flex-wrap: wrap;
+      max-width: var(--ir-page-max-width);
+      margin: 0 auto;
     }
-
-    .stat {
-      text-align: center;
-    }
-
-    .stat-value {
-      font-size: 2.5rem;
+    .site-stat { text-align: center; }
+    .site-stat__value {
+      font-size: var(--font-size-4xl);
       font-weight: 700;
-      color: var(--gold);
+      color: var(--color-primary);
     }
-
-    .stat-label {
-      font-size: 0.9rem;
-      color: var(--text-2);
+    .site-stat__label {
+      font-size: var(--font-size-s);
+      color: var(--text-color-secondary);
       margin-top: 4px;
     }
 
-    /* How It Works */
-    .section {
-      padding: 80px 40px;
+    /* === SECTIONS === */
+    .site-section {
+      padding: 80px var(--ir-page-horz-padding);
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+    .site-section__inner {
+      max-width: var(--ir-page-max-width);
+      width: 100%;
+    }
+    .site-section__headline {
+      font-size: var(--font-size-3xl);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 48px;
+      text-align: center;
+    }
+
+    /* === STEPS === */
+    .site-steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
       max-width: 1200px;
       margin: 0 auto;
     }
-
-    .section-title {
-      text-align: center;
-      font-size: 2rem;
-      margin-bottom: 48px;
+    .site-step-card {
+      background: var(--ir-card-bg);
+      border: 1px solid var(--ir-border);
+      border-radius: var(--border-radius-m);
+      padding: 28px;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
     }
-
-    .steps {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 32px;
+    .site-step-card:hover {
+      border-color: var(--color-primary);
+      background: var(--ir-card-bg-hover);
+      transform: translateY(-4px);
     }
-
-    .step {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 32px;
-      text-align: center;
+    .site-step-card__header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
     }
-
-    .step-number {
-      width: 48px;
-      height: 48px;
-      background: linear-gradient(90deg, var(--gold), var(--gold-dim));
-      color: var(--bg-1);
+    .site-step-card__number {
+      width: 40px;
+      height: 40px;
+      min-width: 40px;
+      background: linear-gradient(135deg, var(--color-primary) 0%, #ffa500 100%);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.25rem;
+      font-size: var(--font-size-m);
       font-weight: 700;
-      margin: 0 auto 20px;
+      color: var(--bg-color-1);
     }
-
-    .step h3 {
-      font-size: 1.2rem;
-      margin-bottom: 12px;
+    .site-step-card__title {
+      font-size: var(--font-size-l);
+      font-weight: 600;
+      color: var(--text-color-primary);
     }
-
-    .step p {
-      color: var(--text-2);
+    .site-step-card__body {
+      font-size: var(--font-size-s);
+      color: var(--text-color-secondary);
       line-height: 1.6;
+      flex: 1;
     }
 
-    /* Benefits */
-    .benefits-grid {
+    /* === VALUE STRIP === */
+    .site-value-strip {
+      padding: 64px var(--ir-page-horz-padding);
+      background: var(--bg-color-2);
+      border-top: 1px solid var(--ir-border);
+      border-bottom: 1px solid var(--ir-border);
+    }
+    .site-value-grid {
+      max-width: var(--ir-page-max-width);
+      margin: 0 auto;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 24px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 32px;
     }
-
-    .benefit {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 24px;
+    .site-value-item {
       display: flex;
       gap: 16px;
       align-items: flex-start;
     }
-
-    .benefit-icon {
-      font-size: 1.5rem;
-      flex-shrink: 0;
+    .site-value-icon {
+      width: 48px;
+      height: 48px;
+      min-width: 48px;
+      background: rgba(255, 214, 10, 0.1);
+      border: 1px solid rgba(255, 214, 10, 0.3);
+      border-radius: var(--border-radius-m);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
     }
-
-    .benefit h4 {
-      font-size: 1rem;
-      margin-bottom: 8px;
-      color: var(--gold);
+    .site-value-content h4 {
+      font-size: var(--font-size-m);
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: var(--color-primary);
     }
-
-    .benefit p {
-      color: var(--text-2);
-      font-size: 0.95rem;
+    .site-value-content p {
+      color: var(--text-color-secondary);
+      font-size: var(--font-size-s);
       line-height: 1.5;
     }
 
-    /* Calculator CTA */
-    .calc-cta {
-      background: rgba(255, 214, 10, 0.05);
-      border: 1px solid rgba(255, 214, 10, 0.2);
-      border-radius: 16px;
-      padding: 48px;
-      text-align: center;
-      margin: 60px auto;
-      max-width: 800px;
-    }
-
-    .calc-cta h3 {
-      font-size: 1.75rem;
-      margin-bottom: 16px;
-    }
-
-    .calc-cta p {
-      color: var(--text-2);
-      margin-bottom: 24px;
-      font-size: 1.1rem;
-    }
-
-    /* Services */
-    .services {
+    /* === SERVICES === */
+    .site-services {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       gap: 12px;
-      padding: 20px 0;
+      padding: 40px var(--ir-page-horz-padding);
     }
-
-    .service-tag {
+    .site-service-tag {
       background: rgba(255, 214, 10, 0.1);
       border: 1px solid rgba(255, 214, 10, 0.3);
-      color: var(--gold);
+      color: var(--color-primary);
       padding: 8px 16px;
       border-radius: 20px;
-      font-size: 0.9rem;
+      font-size: var(--font-size-s);
     }
 
-    /* Footer */
-    .footer {
+    /* === CALC CTA === */
+    .site-calc-cta {
+      padding: 80px var(--ir-page-horz-padding);
       text-align: center;
-      padding: 40px 20px;
-      color: var(--text-2);
-      font-size: 0.85rem;
-      border-top: 1px solid var(--border);
-      margin-top: 60px;
+      background: radial-gradient(ellipse at center, #ffb80014 0%, transparent 70%);
+    }
+    .site-calc-cta__box {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 48px 40px;
+      background: rgba(255, 184, 0, 0.05);
+      border: 2px solid var(--color-primary);
+      border-radius: 16px;
+    }
+    .site-calc-cta__headline {
+      font-size: var(--font-size-2xl);
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    .site-calc-cta__text {
+      font-size: var(--font-size-m);
+      color: var(--text-color-secondary);
+      margin-bottom: 24px;
     }
 
-    .footer a {
-      color: var(--gold);
+    /* === FOOTER === */
+    .site-footer {
+      background: var(--bg-color-2);
+      padding: 48px var(--ir-page-horz-padding) 32px;
+      text-align: center;
+      border-top: 1px solid var(--ir-border);
+    }
+    .site-footer__links {
+      display: flex;
+      gap: 32px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+    .site-footer__link {
+      color: var(--text-color-secondary);
       text-decoration: none;
+      font-size: var(--font-size-s);
+      transition: color 0.2s;
+    }
+    .site-footer__link:hover { color: var(--color-primary); }
+    .site-footer__copyright {
+      color: var(--text-color-tertiary);
+      font-size: var(--font-size-s);
     }
 
-    .footer a:hover {
-      text-decoration: underline;
-    }
-
-    /* Responsive */
+    /* === RESPONSIVE === */
     @media (max-width: 768px) {
-      .header {
-        padding: 16px 20px;
-        flex-direction: column;
-        gap: 16px;
-      }
-
-      .hero {
-        padding: 40px 20px;
-      }
-
-      .hero h2 {
-        font-size: 2rem;
-      }
-
-      .stats {
-        gap: 30px;
-      }
-
-      .section {
-        padding: 40px 20px;
-      }
+      :root { --ir-page-horz-padding: 24px; }
+      .site-header-container { padding: 16px 24px; }
+      .site-desktop-links { display: none; }
+      .site-hero { padding: 48px 24px; }
+      .site-hero__headline { font-size: var(--font-size-3xl); }
+      .site-section { padding: 64px 24px; }
+      .site-stats { gap: 30px; }
+      .site-value-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
   <!-- Header -->
-  <header class="header">
-    <div class="header-brand">
-      <span class="logo">🌈</span>
-      <h1>Iron Rainbow</h1>
+  <header class="site-header-container">
+    <div class="site-header-inner">
+      <a href="/" class="site-header-logo">
+        <img src="logo/logo-good-size.png" alt="Iron Rainbow">
+        <span class="site-header-logo-text">Iron<span>Rainbow</span></span>
+      </a>
+      <nav class="site-desktop-links">
+        <a href="#how-it-works">How It Works</a>
+        <a href="#benefits">Benefits</a>
+        <a href="calculator.html">ROI Calculator</a>
+        <a href="mailto:partners@ironrainbow.com" class="site-btn site-btn--primary site-btn--small">Become a Partner</a>
+      </nav>
     </div>
-    <nav class="header-nav">
-      <a href="#how-it-works">How It Works</a>
-      <a href="#benefits">Benefits</a>
-      <a href="calculator.html">ROI Calculator</a>
-      <a href="mailto:partners@ironrainbow.com" class="btn btn-primary">Become a Partner</a>
-    </nav>
   </header>
 
   <!-- Hero -->
-  <section class="hero">
-    <h2>Grow Your Powder Coating Business with <span>Zero Customer Acquisition Cost</span></h2>
-    <p>Iron Rainbow brings you qualified customers ready to pay. You do what you do best — coat. We handle the marketing, booking, and payment processing.</p>
-    <div class="hero-cta">
-      <a href="calculator.html" class="btn btn-primary">Calculate Your ROI</a>
-      <a href="mailto:partners@ironrainbow.com" class="btn btn-secondary">Contact Us</a>
+  <section class="site-hero">
+    <div class="site-hero__container">
+      <div class="site-hero__badge">Now Accepting Founding Partners</div>
+      <h1 class="site-hero__headline">Grow Your Powder Coating Business with <span>Zero Customer Acquisition Cost</span></h1>
+      <p class="site-hero__subheadline">Iron Rainbow brings you qualified customers ready to pay. You do what you do best — coat. We handle the marketing, booking, and payment processing.</p>
+      <div class="site-hero__cta">
+        <a href="calculator.html" class="site-btn site-btn--primary">Calculate Your ROI</a>
+        <a href="mailto:partners@ironrainbow.com" class="site-btn site-btn--secondary">Contact Us</a>
+      </div>
     </div>
   </section>
 
   <!-- Stats -->
-  <div class="stats">
-    <div class="stat">
-      <div class="stat-value">80%</div>
-      <div class="stat-label">You keep on every order</div>
+  <div class="site-stats">
+    <div class="site-stat">
+      <div class="site-stat__value">80%</div>
+      <div class="site-stat__label">You keep on every order</div>
     </div>
-    <div class="stat">
-      <div class="stat-value">$0</div>
-      <div class="stat-label">Monthly fees</div>
+    <div class="site-stat">
+      <div class="site-stat__value">$0</div>
+      <div class="site-stat__label">Monthly fees</div>
     </div>
-    <div class="stat">
-      <div class="stat-value">~2x</div>
-      <div class="stat-label">Profit ROI on territory fee</div>
+    <div class="site-stat">
+      <div class="site-stat__value">~2x</div>
+      <div class="site-stat__label">Profit ROI on territory fee</div>
     </div>
   </div>
 
   <!-- How It Works -->
-  <section class="section" id="how-it-works">
-    <h2 class="section-title">How It Works</h2>
-    <div class="steps">
-      <div class="step">
-        <div class="step-number">1</div>
-        <h3>Join the Network</h3>
-        <p>Pay a one-time territory fee based on your area's population. 50% goes directly to marketing in your territory.</p>
-      </div>
-      <div class="step">
-        <div class="step-number">2</div>
-        <h3>We Send Customers</h3>
-        <p>Customers use our 3D configurator to design their order, pick colors, and pay. Orders flow to you automatically.</p>
-      </div>
-      <div class="step">
-        <div class="step-number">3</div>
-        <h3>You Coat, We Pay</h3>
-        <p>Complete the work, mark it done. You keep 80% of every order. No invoicing, no chasing payments.</p>
+  <section class="site-section" id="how-it-works">
+    <div class="site-section__inner">
+      <h2 class="site-section__headline">How It Works</h2>
+      <div class="site-steps-grid">
+        <div class="site-step-card">
+          <div class="site-step-card__header">
+            <div class="site-step-card__number">1</div>
+            <div class="site-step-card__title">Join the Network</div>
+          </div>
+          <div class="site-step-card__body">Pay a one-time territory fee based on your area's population. 50% goes directly to marketing in your territory.</div>
+        </div>
+        <div class="site-step-card">
+          <div class="site-step-card__header">
+            <div class="site-step-card__number">2</div>
+            <div class="site-step-card__title">We Send Customers</div>
+          </div>
+          <div class="site-step-card__body">Customers use our 3D configurator to design their order, pick colors, and pay. Orders flow to you automatically.</div>
+        </div>
+        <div class="site-step-card">
+          <div class="site-step-card__header">
+            <div class="site-step-card__number">3</div>
+            <div class="site-step-card__title">You Coat, We Pay</div>
+          </div>
+          <div class="site-step-card__body">Complete the work, mark it done. You keep 80% of every order. No invoicing, no chasing payments.</div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- Services -->
-  <div class="services">
-    <span class="service-tag">Powder Coating</span>
-    <span class="service-tag">Wheel Refinishing</span>
-    <span class="service-tag">Ceramic Coating</span>
-    <span class="service-tag">Sandblasting</span>
-    <span class="service-tag">Custom Finishes</span>
+  <div class="site-services">
+    <span class="site-service-tag">Powder Coating</span>
+    <span class="site-service-tag">Wheel Refinishing</span>
+    <span class="site-service-tag">Ceramic Coating</span>
+    <span class="site-service-tag">Sandblasting</span>
+    <span class="site-service-tag">Custom Finishes</span>
   </div>
 
   <!-- Benefits -->
-  <section class="section" id="benefits">
-    <h2 class="section-title">Why Partners Love Iron Rainbow</h2>
-    <div class="benefits-grid">
-      <div class="benefit">
-        <div class="benefit-icon">💰</div>
-        <div>
+  <section class="site-value-strip" id="benefits">
+    <h2 class="site-section__headline" style="margin-bottom: 48px;">Why Partners Love Iron Rainbow</h2>
+    <div class="site-value-grid">
+      <div class="site-value-item">
+        <div class="site-value-icon">💰</div>
+        <div class="site-value-content">
           <h4>No Monthly Fees</h4>
           <p>One-time territory fee only. No subscriptions, no hidden costs. Your territory is yours.</p>
         </div>
       </div>
-      <div class="benefit">
-        <div class="benefit-icon">📱</div>
-        <div>
+      <div class="site-value-item">
+        <div class="site-value-icon">📱</div>
+        <div class="site-value-content">
           <h4>No Marketing Needed</h4>
           <p>We run Google, Meta, TikTok, and SEO campaigns in your area. You just focus on coating.</p>
         </div>
       </div>
-      <div class="benefit">
-        <div class="benefit-icon">💳</div>
-        <div>
+      <div class="site-value-item">
+        <div class="site-value-icon">💳</div>
+        <div class="site-value-content">
           <h4>Payment Handled</h4>
           <p>Customers pay upfront through our platform. No invoicing, no collections, no hassle.</p>
         </div>
       </div>
-      <div class="benefit">
-        <div class="benefit-icon">📊</div>
-        <div>
+      <div class="site-value-item">
+        <div class="site-value-icon">📊</div>
+        <div class="site-value-content">
           <h4>Operations Software</h4>
           <p>Our Flex platform handles scheduling, customer communication, and order tracking.</p>
         </div>
       </div>
-      <div class="benefit">
-        <div class="benefit-icon">🎯</div>
-        <div>
+      <div class="site-value-item">
+        <div class="site-value-icon">🎯</div>
+        <div class="site-value-content">
           <h4>Qualified Leads Only</h4>
           <p>Customers configure and pay before you see them. No tire-kickers, no quotes that go nowhere.</p>
         </div>
       </div>
-      <div class="benefit">
-        <div class="benefit-icon">🚀</div>
-        <div>
+      <div class="site-value-item">
+        <div class="site-value-icon">🚀</div>
+        <div class="site-value-content">
           <h4>Founding Partner Perks</h4>
           <p>First partner in each state gets 50% off territory fees. Early movers win.</p>
         </div>
@@ -459,20 +533,22 @@
   </section>
 
   <!-- Calculator CTA -->
-  <div class="calc-cta">
-    <h3>See Your Potential Return</h3>
-    <p>Use our ROI calculator to see exactly what joining Iron Rainbow could mean for your business.</p>
-    <a href="calculator.html" class="btn btn-primary">Open ROI Calculator</a>
-  </div>
+  <section class="site-calc-cta">
+    <div class="site-calc-cta__box">
+      <h3 class="site-calc-cta__headline">See Your Potential Return</h3>
+      <p class="site-calc-cta__text">Use our ROI calculator to see exactly what joining Iron Rainbow could mean for your business.</p>
+      <a href="calculator.html" class="site-btn site-btn--primary">Open ROI Calculator</a>
+    </div>
+  </section>
 
   <!-- Footer -->
-  <footer class="footer">
-    <p>&copy; 2025 Iron Rainbow. All rights reserved.</p>
-    <p style="margin-top: 8px;">
-      <a href="https://ironrainbow.com">ironrainbow.com</a> ·
-      <a href="mailto:partners@ironrainbow.com">partners@ironrainbow.com</a> ·
-      San Diego, California
-    </p>
+  <footer class="site-footer">
+    <div class="site-footer__links">
+      <a href="https://ironrainbow.com" class="site-footer__link">ironrainbow.com</a>
+      <a href="mailto:partners@ironrainbow.com" class="site-footer__link">partners@ironrainbow.com</a>
+      <a href="calculator.html" class="site-footer__link">ROI Calculator</a>
+    </div>
+    <p class="site-footer__copyright">© 2025 Iron Rainbow. All rights reserved. · San Diego, California</p>
   </footer>
 </body>
 </html>
