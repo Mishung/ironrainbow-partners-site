@@ -1,0 +1,1394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Partner ROI Calculator - Iron Rainbow</title>
+  <meta name="description" content="Calculate your potential return on investment as an Iron Rainbow powder coating partner.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌈</text></svg>">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --gold: #ffd60a;
+      --gold-dim: #b39700;
+      --bg-1: #1a1a2e;
+      --bg-2: #16213e;
+      --bg-3: #1f2b47;
+      --bg-4: #2a3a5a;
+      --text-1: #ffffff;
+      --text-2: #a0a0a0;
+      --text-3: #606060;
+      --green: #4ade80;
+      --red: #f87171;
+      --blue: #60a5fa;
+      --purple: #a78bfa;
+      --orange: #fb923c;
+      --border: rgba(255, 255, 255, 0.1);
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, var(--bg-1) 0%, var(--bg-2) 100%);
+      color: var(--text-1);
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+
+    /* Header */
+    .header {
+      padding: 20px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text-1);
+    }
+
+    .header-brand .logo {
+      font-size: 28px;
+    }
+
+    .header-brand h1 {
+      font-size: 1.25rem;
+      background: linear-gradient(90deg, var(--gold), #ff9500);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 12px;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+      border: none;
+      font-family: inherit;
+    }
+
+    .btn-secondary {
+      background: var(--bg-3);
+      color: var(--text-1);
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      background: var(--bg-4);
+    }
+
+    .btn-primary {
+      background: linear-gradient(90deg, var(--gold), #ff9500);
+      color: var(--bg-1);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(255, 214, 10, 0.3);
+    }
+
+    /* Main Content */
+    .container {
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 32px;
+    }
+
+    .page-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .page-header h2 {
+      font-size: 2rem;
+      margin-bottom: 8px;
+    }
+
+    .page-header p {
+      color: var(--text-2);
+      font-size: 1.1rem;
+    }
+
+    /* Calculator Grid */
+    .calc-grid {
+      display: grid;
+      grid-template-columns: 420px 1fr;
+      gap: 32px;
+    }
+
+    @media (max-width: 1200px) {
+      .calc-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Cards */
+    .card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+
+    .card h3 {
+      font-size: 1rem;
+      margin-bottom: 20px;
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card h3 .badge {
+      font-size: 0.7rem;
+      background: var(--bg-3);
+      padding: 2px 8px;
+      border-radius: 10px;
+      color: var(--text-2);
+      font-weight: normal;
+    }
+
+    /* Input Groups */
+    .input-group {
+      margin-bottom: 20px;
+    }
+
+    .input-group label {
+      display: block;
+      font-size: 0.875rem;
+      color: var(--text-2);
+      margin-bottom: 6px;
+    }
+
+    .input-group input,
+    .input-group select {
+      width: 100%;
+      padding: 12px 16px;
+      background: var(--bg-3);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text-1);
+      font-size: 1rem;
+      font-family: inherit;
+    }
+
+    .input-group input:focus,
+    .input-group select:focus {
+      outline: none;
+      border-color: var(--gold);
+    }
+
+    /* Sliders */
+    .slider-group {
+      margin-bottom: 16px;
+    }
+
+    .slider-group label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      color: var(--text-2);
+      margin-bottom: 6px;
+    }
+
+    .slider-group label span {
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    .slider-group input[type="range"] {
+      width: 100%;
+      height: 6px;
+      -webkit-appearance: none;
+      background: var(--bg-3);
+      border-radius: 3px;
+      outline: none;
+    }
+
+    .slider-group input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 16px;
+      height: 16px;
+      background: var(--gold);
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    /* Channel Mix */
+    .channel-row {
+      display: grid;
+      grid-template-columns: 100px 1fr 60px;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 12px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .channel-row:last-of-type { border-bottom: none; }
+
+    .channel-name {
+      font-size: 0.8rem;
+      color: var(--text-2);
+    }
+
+    .channel-cac {
+      font-size: 0.75rem;
+      color: var(--text-3);
+    }
+
+    .channel-weight {
+      text-align: right;
+      font-weight: 600;
+      color: var(--gold);
+      font-size: 0.9rem;
+    }
+
+    /* CAC Display */
+    .cac-display {
+      background: var(--bg-2);
+      border-radius: 8px;
+      padding: 16px;
+      margin-top: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .cac-display .label {
+      font-size: 0.875rem;
+      color: var(--text-2);
+    }
+
+    .cac-display .value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--gold);
+    }
+
+    .market-modifier {
+      background: var(--bg-2);
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin-top: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+    }
+
+    .market-modifier .label { color: var(--text-2); }
+    .market-modifier .value { font-weight: 600; }
+    .market-modifier .value.low { color: var(--green); }
+    .market-modifier .value.medium { color: var(--gold); }
+    .market-modifier .value.high { color: var(--orange); }
+
+    /* Collapsible */
+    .collapsible-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      padding: 4px 0;
+    }
+
+    .collapsible-header:hover h3 { color: #fff; }
+
+    .collapsible-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+    }
+
+    .collapsible-content.open {
+      max-height: 1000px;
+    }
+
+    .chevron {
+      transition: transform 0.3s;
+      color: var(--text-3);
+    }
+
+    .chevron.open {
+      transform: rotate(180deg);
+    }
+
+    /* Results Grid */
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .results-grid.four-col {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    @media (max-width: 1200px) {
+      .results-grid { grid-template-columns: repeat(2, 1fr); }
+      .results-grid.four-col { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 600px) {
+      .results-grid { grid-template-columns: 1fr; }
+      .results-grid.four-col { grid-template-columns: 1fr; }
+    }
+
+    /* Result Cards */
+    .result-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+    }
+
+    .result-card.highlight {
+      border-color: var(--gold);
+      background: rgba(255, 214, 10, 0.05);
+    }
+
+    .result-card.green {
+      border-color: var(--green);
+      background: rgba(74, 222, 128, 0.05);
+    }
+
+    .result-card.blue {
+      border-color: var(--blue);
+      background: rgba(96, 165, 250, 0.05);
+    }
+
+    .result-card.purple {
+      border-color: var(--purple);
+      background: rgba(167, 139, 250, 0.05);
+    }
+
+    .result-card h4 {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-3);
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+
+    .result-card .value {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .result-card .subvalue {
+      font-size: 0.8rem;
+      color: var(--text-2);
+      margin-top: 4px;
+    }
+
+    .result-card.highlight .value { color: var(--gold); }
+    .result-card.green .value { color: var(--green); }
+    .result-card.blue .value { color: var(--blue); }
+    .result-card.purple .value { color: var(--purple); }
+
+    /* Section Titles */
+    .section-title {
+      font-size: 1rem;
+      color: var(--text-2);
+      margin: 32px 0 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Funnel Visual */
+    .demand-visual {
+      background: var(--bg-2);
+      border-radius: 8px;
+      padding: 20px;
+      margin-top: 16px;
+    }
+
+    .funnel-step {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 8px;
+    }
+
+    .funnel-label {
+      font-size: 0.75rem;
+      color: var(--text-3);
+      min-width: 140px;
+    }
+
+    .funnel-bar {
+      height: 32px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      padding: 0 12px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: width 0.3s ease;
+    }
+
+    .funnel-bar.pop { background: var(--purple); color: white; }
+    .funnel-bar.demand { background: var(--blue); color: white; }
+    .funnel-bar.ir { background: var(--green); color: black; }
+
+    /* Bar Chart */
+    .bar-row {
+      display: flex;
+      align-items: center;
+      margin: 16px 0;
+    }
+
+    .bar-label {
+      width: 140px;
+      font-size: 0.85rem;
+      color: var(--text-2);
+    }
+
+    .bar-container {
+      flex: 1;
+      height: 28px;
+      background: var(--bg-3);
+      border-radius: 4px;
+      overflow: hidden;
+      display: flex;
+    }
+
+    .bar-segment {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 600;
+      transition: width 0.3s ease;
+    }
+
+    .bar-segment.partner { background: var(--green); color: black; }
+    .bar-segment.ir { background: var(--gold); color: black; }
+    .bar-segment.ads { background: var(--blue); color: black; }
+
+    /* Legend */
+    .legend {
+      display: flex;
+      gap: 24px;
+      margin-top: 16px;
+      font-size: 0.85rem;
+      flex-wrap: wrap;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .legend-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+    }
+
+    /* Breakdown */
+    .breakdown {
+      background: var(--bg-2);
+      border-radius: 8px;
+      padding: 16px;
+      margin-top: 16px;
+    }
+
+    .breakdown-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.9rem;
+    }
+
+    .breakdown-row:last-child { border-bottom: none; }
+    .breakdown-row .label { color: var(--text-2); }
+    .breakdown-row .value { font-weight: 600; }
+
+    .breakdown-row.total {
+      margin-top: 8px;
+      padding-top: 16px;
+      border-top: 2px solid var(--gold);
+    }
+
+    .breakdown-row.total .value {
+      color: var(--gold);
+      font-size: 1.1rem;
+    }
+
+    /* Reset Button */
+    .reset-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-2);
+      padding: 10px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.875rem;
+      margin-top: 16px;
+      width: 100%;
+      font-family: inherit;
+    }
+
+    .reset-btn:hover {
+      border-color: var(--text-2);
+      color: var(--text-1);
+    }
+
+    /* Share Modal */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-overlay.open {
+      display: flex;
+    }
+
+    .modal {
+      background: var(--bg-2);
+      border-radius: 12px;
+      padding: 24px;
+      max-width: 500px;
+      width: 90%;
+      border: 1px solid var(--border);
+    }
+
+    .modal h3 {
+      margin-bottom: 16px;
+      color: var(--gold);
+    }
+
+    .modal p {
+      color: var(--text-2);
+      margin-bottom: 16px;
+      font-size: 0.9rem;
+    }
+
+    .share-url {
+      display: flex;
+      gap: 8px;
+    }
+
+    .share-url input {
+      flex: 1;
+      padding: 12px;
+      background: var(--bg-3);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text-1);
+      font-size: 0.9rem;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--green);
+      color: black;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 500;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.3s;
+      z-index: 2000;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--text-3);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--border);
+      margin-top: 60px;
+    }
+
+    .footer a {
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <a href="/" class="header-brand">
+      <span class="logo">🌈</span>
+      <h1>Iron Rainbow</h1>
+    </a>
+    <div class="header-actions">
+      <button class="btn btn-secondary" onclick="openShareModal()">
+        📤 Share This Calculator
+      </button>
+      <a href="/" class="btn btn-secondary">← Back</a>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="container">
+    <div class="page-header">
+      <h2>Partner ROI Calculator</h2>
+      <p>See your potential return on joining Iron Rainbow</p>
+    </div>
+
+    <div class="calc-grid">
+      <!-- INPUTS -->
+      <div class="inputs">
+        <!-- Territory Setup -->
+        <div class="card">
+          <h3>Territory Setup</h3>
+          <div class="input-group">
+            <label>Population</label>
+            <input type="number" id="population" value="150000" min="60000" step="10000">
+          </div>
+          <div class="input-group">
+            <label>Area Type</label>
+            <select id="areaType">
+              <option value="0.05">Rural ($0.05/person)</option>
+              <option value="0.07">Small City ($0.07/person)</option>
+              <option value="0.08" selected>Metro Suburb ($0.08/person)</option>
+              <option value="0.10">Major Metro ($0.10/person)</option>
+            </select>
+          </div>
+          <div class="input-group">
+            <label>Partner Tier</label>
+            <select id="partnerTier">
+              <option value="0.5" selected>Founding Partner (50% off)</option>
+              <option value="0.75">Premier Partner (25% off)</option>
+              <option value="1">Standard Partner (full price)</option>
+            </select>
+          </div>
+          <div class="slider-group">
+            <label>Territory fee to ads <span id="adSplitDisplay">50%</span></label>
+            <input type="range" id="adSplit" min="0" max="100" value="50">
+          </div>
+        </div>
+
+        <!-- Channel Mix -->
+        <div class="card">
+          <div class="collapsible-header" onclick="toggleCollapsible('channelMix')">
+            <h3>Channel Mix <span class="badge">CAC Model</span></h3>
+            <span class="chevron" id="channelMixChevron">▼</span>
+          </div>
+          <div class="collapsible-content open" id="channelMixContent">
+            <div class="channel-row">
+              <div>
+                <div class="channel-name">Google Search</div>
+                <div class="channel-cac">$26.67 CAC</div>
+              </div>
+              <input type="range" id="channelGoogle" min="0" max="100" value="35">
+              <div class="channel-weight" id="channelGoogleDisplay">35%</div>
+            </div>
+            <div class="channel-row">
+              <div>
+                <div class="channel-name">Meta Ads</div>
+                <div class="channel-cac">$36.28 CAC</div>
+              </div>
+              <input type="range" id="channelMeta" min="0" max="100" value="25">
+              <div class="channel-weight" id="channelMetaDisplay">25%</div>
+            </div>
+            <div class="channel-row">
+              <div>
+                <div class="channel-name">TikTok Organic</div>
+                <div class="channel-cac">$8.75 CAC</div>
+              </div>
+              <input type="range" id="channelTikTok" min="0" max="100" value="15">
+              <div class="channel-weight" id="channelTikTokDisplay">15%</div>
+            </div>
+            <div class="channel-row">
+              <div>
+                <div class="channel-name">Local SEO</div>
+                <div class="channel-cac">$13.33 CAC</div>
+              </div>
+              <input type="range" id="channelSEO" min="0" max="100" value="20">
+              <div class="channel-weight" id="channelSEODisplay">20%</div>
+            </div>
+            <div class="channel-row">
+              <div>
+                <div class="channel-name">Referrals</div>
+                <div class="channel-cac">$10.00 CAC</div>
+              </div>
+              <input type="range" id="channelReferral" min="0" max="100" value="5">
+              <div class="channel-weight" id="channelReferralDisplay">5%</div>
+            </div>
+            <div class="cac-display">
+              <div class="label">Blended CAC</div>
+              <div class="value" id="blendedCAC">$22.45</div>
+            </div>
+            <div class="market-modifier">
+              <div class="label">Market size modifier</div>
+              <div class="value medium" id="marketModifier">×1.0 (Mid Metro)</div>
+            </div>
+            <div class="cac-display" style="margin-top: 8px; background: rgba(255,214,10,0.1);">
+              <div class="label">Adjusted CAC</div>
+              <div class="value" id="adjustedCAC">$22.45</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Order Economics -->
+        <div class="card">
+          <div class="collapsible-header" onclick="toggleCollapsible('orderEcon')">
+            <h3>Order Economics</h3>
+            <span class="chevron open" id="orderEconChevron">▼</span>
+          </div>
+          <div class="collapsible-content open" id="orderEconContent">
+            <div class="slider-group">
+              <label>Average Order Value <span id="aovDisplay">$300</span></label>
+              <input type="range" id="aov" min="100" max="1000" value="300" step="25">
+            </div>
+            <div class="slider-group">
+              <label>Platform fee <span id="platformFeeDisplay">20%</span></label>
+              <input type="range" id="platformFee" min="10" max="40" value="20">
+            </div>
+            <div class="slider-group">
+              <label>Platform fee to ongoing ads <span id="ongoingAdSplitDisplay">30%</span></label>
+              <input type="range" id="ongoingAdSplit" min="0" max="100" value="30">
+            </div>
+            <div class="slider-group" style="margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border);">
+              <label>Your profit margin <span id="profitMarginDisplay">40%</span></label>
+              <input type="range" id="profitMargin" min="15" max="60" value="40">
+            </div>
+            <div style="font-size: 0.75rem; color: var(--text-3); margin-top: 4px;">
+              Revenue ≠ profit. This calculates true ROI on territory fee.
+            </div>
+          </div>
+        </div>
+
+        <!-- Demand Model -->
+        <div class="card">
+          <div class="collapsible-header" onclick="toggleCollapsible('demandModel')">
+            <h3>Demand Model <span class="badge">Market Sizing</span></h3>
+            <span class="chevron open" id="demandModelChevron">▼</span>
+          </div>
+          <div class="collapsible-content open" id="demandModelContent">
+            <div class="slider-group">
+              <label>Annual coating demand rate <span id="demandRateDisplay">0.25%</span></label>
+              <input type="range" id="demandRate" min="0.1" max="0.5" value="0.25" step="0.01">
+            </div>
+            <div class="slider-group">
+              <label>IR conversion rate <span id="irConversionDisplay">42%</span></label>
+              <input type="range" id="irConversion" min="20" max="70" value="42">
+            </div>
+          </div>
+        </div>
+
+        <button class="reset-btn" onclick="resetDefaults()">Reset to Defaults</button>
+      </div>
+
+      <!-- RESULTS -->
+      <div class="results">
+        <!-- Territory Fee Results -->
+        <div class="results-grid">
+          <div class="result-card highlight">
+            <h4>Territory Fee</h4>
+            <div class="value" id="territoryFee">$6,000</div>
+            <div class="subvalue" id="fullPriceNote">Full: $12,000</div>
+          </div>
+          <div class="result-card">
+            <h4>Initial Ad Budget</h4>
+            <div class="value" id="adBudget">$3,000</div>
+            <div class="subvalue" id="adBudgetPercent">50% of fee</div>
+          </div>
+          <div class="result-card">
+            <h4>IR Margin (Territory)</h4>
+            <div class="value" id="irMarginTerritory">$3,000</div>
+            <div class="subvalue">50% of fee</div>
+          </div>
+        </div>
+
+        <h3 class="section-title">🎯 Initial Campaign (from territory fee)</h3>
+
+        <div class="results-grid four-col">
+          <div class="result-card blue">
+            <h4>Adjusted CAC</h4>
+            <div class="value" id="cacResult">$22.45</div>
+            <div class="subvalue">blended + market</div>
+          </div>
+          <div class="result-card green">
+            <h4>Est. Orders</h4>
+            <div class="value" id="estOrders">133</div>
+            <div class="subvalue" id="estOrdersCalc">from initial ads</div>
+          </div>
+          <div class="result-card green">
+            <h4>Your Revenue</h4>
+            <div class="value" id="partnerRevenue">$32,000</div>
+            <div class="subvalue" id="partnerRevenueCalc">133 × $300 × 80%</div>
+          </div>
+          <div class="result-card green">
+            <h4>Your Profit</h4>
+            <div class="value" id="partnerProfit">$12,800</div>
+            <div class="subvalue" id="partnerProfitCalc">40% margin</div>
+          </div>
+        </div>
+
+        <div class="results-grid" style="margin-top: 16px;">
+          <div class="result-card highlight">
+            <h4>Profit ROI</h4>
+            <div class="value" id="partnerProfitROI">2.1x</div>
+            <div class="subvalue">actual profit vs territory fee</div>
+          </div>
+          <div class="result-card">
+            <h4>Revenue ROI</h4>
+            <div class="value" id="partnerROI">5.3x</div>
+            <div class="subvalue">revenue (not profit)</div>
+          </div>
+          <div class="result-card">
+            <h4>Payback Period</h4>
+            <div class="value" id="paybackPeriod">~4 months</div>
+            <div class="subvalue" id="paybackCalc">based on profit</div>
+          </div>
+        </div>
+
+        <h3 class="section-title">📊 Annual Market Potential</h3>
+
+        <div class="demand-visual">
+          <div class="funnel-step">
+            <div class="funnel-label">Territory Population</div>
+            <div class="funnel-bar pop" id="funnelPop" style="width: 100%;">150,000</div>
+          </div>
+          <div class="funnel-step">
+            <div class="funnel-label">Annual Demand (0.25%)</div>
+            <div class="funnel-bar demand" id="funnelDemand" style="width: 40%;">375 jobs</div>
+          </div>
+          <div class="funnel-step">
+            <div class="funnel-label">IR Addressable (42%)</div>
+            <div class="funnel-bar ir" id="funnelIR" style="width: 20%;">158 jobs</div>
+          </div>
+        </div>
+
+        <div class="results-grid" style="margin-top: 16px;">
+          <div class="result-card purple">
+            <h4>Annual Market Demand</h4>
+            <div class="value" id="annualDemand">375</div>
+            <div class="subvalue">coating jobs/year</div>
+          </div>
+          <div class="result-card purple">
+            <h4>IR Addressable</h4>
+            <div class="value" id="irAddressable">158</div>
+            <div class="subvalue">jobs via platform</div>
+          </div>
+          <div class="result-card purple">
+            <h4>Annual Revenue Potential</h4>
+            <div class="value" id="annualPartnerPotential">$37,920</div>
+            <div class="subvalue">at 80% × $300 AOV</div>
+          </div>
+          <div class="result-card green">
+            <h4>Annual Profit Potential</h4>
+            <div class="value" id="annualPartnerProfit">$15,168</div>
+            <div class="subvalue" id="annualProfitCalc">at 40% margin</div>
+          </div>
+        </div>
+
+        <h3 class="section-title">💰 Per-Order Revenue Split</h3>
+
+        <div class="bar-row">
+          <div class="bar-label">$<span id="orderValueLabel">300</span> order</div>
+          <div class="bar-container">
+            <div class="bar-segment partner" id="partnerBar" style="width: 80%;">$240</div>
+            <div class="bar-segment ir" id="irBar" style="width: 14%;">$42</div>
+            <div class="bar-segment ads" id="adsBar" style="width: 6%;">$18</div>
+          </div>
+        </div>
+
+        <div class="legend">
+          <div class="legend-item">
+            <div class="legend-dot" style="background: var(--green);"></div>
+            <span>You Keep (<span id="partnerPercent">80</span>%)</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-dot" style="background: var(--gold);"></div>
+            <span>IR Margin (<span id="irPercent">14</span>%)</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-dot" style="background: var(--blue);"></div>
+            <span>Ongoing Ads (<span id="adsPercent">6</span>%)</span>
+          </div>
+        </div>
+
+        <h3 class="section-title">📅 Monthly Projections (Ongoing)</h3>
+
+        <div class="results-grid four-col">
+          <div class="result-card">
+            <h4>10 orders/mo</h4>
+            <div class="value" id="monthly10">$2,400</div>
+            <div class="subvalue" id="monthly10Profit">$960 profit</div>
+          </div>
+          <div class="result-card green">
+            <h4>20 orders/mo</h4>
+            <div class="value" id="monthly20">$4,800</div>
+            <div class="subvalue" id="monthly20Profit">$1,920 profit</div>
+          </div>
+          <div class="result-card highlight">
+            <h4>IR per 20 orders</h4>
+            <div class="value" id="irMonthly20">$840</div>
+            <div class="subvalue">platform margin</div>
+          </div>
+          <div class="result-card blue">
+            <h4>Ad fund per 20</h4>
+            <div class="value" id="adFund20">$360</div>
+            <div class="subvalue">for more ads</div>
+          </div>
+        </div>
+
+        <h3 class="section-title">📋 Full Breakdown</h3>
+
+        <div class="card" style="margin-bottom: 0;">
+          <div class="breakdown">
+            <div class="breakdown-row">
+              <span class="label">Territory population</span>
+              <span class="value" id="breakPop">150,000</span>
+            </div>
+            <div class="breakdown-row">
+              <span class="label">Rate per person</span>
+              <span class="value" id="breakRate">$0.08</span>
+            </div>
+            <div class="breakdown-row">
+              <span class="label">Full territory price</span>
+              <span class="value" id="breakFull">$12,000</span>
+            </div>
+            <div class="breakdown-row">
+              <span class="label">Your discount</span>
+              <span class="value" id="breakDiscount">50%</span>
+            </div>
+            <div class="breakdown-row total">
+              <span class="label">You pay</span>
+              <span class="value" id="breakPays">$6,000</span>
+            </div>
+          </div>
+
+          <div class="breakdown" style="margin-top: 12px;">
+            <div class="breakdown-row">
+              <span class="label">To initial ad campaign</span>
+              <span class="value" id="breakAds">$3,000</span>
+            </div>
+            <div class="breakdown-row">
+              <span class="label">To Iron Rainbow margin</span>
+              <span class="value" id="breakIR">$3,000</span>
+            </div>
+            <div class="breakdown-row">
+              <span class="label">Blended CAC</span>
+              <span class="value" id="breakBlendedCAC">$22.45</span>
+            </div>
+            <div class="breakdown-row">
+              <span class="label">Market modifier</span>
+              <span class="value" id="breakMarketMod">×1.0</span>
+            </div>
+            <div class="breakdown-row">
+              <span class="label">Adjusted CAC</span>
+              <span class="value" id="breakAdjustedCAC">$22.45</span>
+            </div>
+            <div class="breakdown-row">
+              <span class="label">Est. orders from campaign</span>
+              <span class="value" id="breakOrders">133</span>
+            </div>
+            <div class="breakdown-row">
+              <span class="label">Your gross revenue</span>
+              <span class="value" id="breakPartnerGross">$40,000</span>
+            </div>
+            <div class="breakdown-row">
+              <span class="label">Your net (after platform fee)</span>
+              <span class="value" id="breakPartnerNet">$32,000</span>
+            </div>
+            <div class="breakdown-row">
+              <span class="label">Your profit margin</span>
+              <span class="value" id="breakProfitMargin">40%</span>
+            </div>
+            <div class="breakdown-row">
+              <span class="label">Your actual profit</span>
+              <span class="value" id="breakPartnerProfit">$12,800</span>
+            </div>
+            <div class="breakdown-row">
+              <span class="label">Revenue ROI (gross)</span>
+              <span class="value" id="breakROI">5.3x</span>
+            </div>
+            <div class="breakdown-row total">
+              <span class="label">Profit ROI (real return)</span>
+              <span class="value" id="breakProfitROI">2.1x</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2025 Iron Rainbow. All rights reserved.</p>
+    <p>
+      <a href="https://ironrainbow.com">ironrainbow.com</a> · San Diego, California
+    </p>
+  </footer>
+
+  <!-- Share Modal -->
+  <div class="modal-overlay" id="shareModal">
+    <div class="modal">
+      <h3>📤 Share This Calculator</h3>
+      <p>Copy this link to share the calculator with your current settings:</p>
+      <div class="share-url">
+        <input type="text" id="shareUrl" readonly>
+        <button class="btn btn-primary" onclick="copyShareUrl()">Copy</button>
+      </div>
+      <div style="margin-top: 16px; text-align: right;">
+        <button class="btn btn-secondary" onclick="closeShareModal()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast">Link copied!</div>
+
+  <script>
+    // Channel CAC values
+    const CHANNEL_CAC = {
+      google: 26.67,
+      meta: 36.28,
+      tiktok: 8.75,
+      seo: 13.33,
+      referral: 10.00
+    };
+
+    // Defaults
+    const defaults = {
+      population: 150000,
+      areaType: '0.08',
+      partnerTier: '0.5',
+      adSplit: 50,
+      channelGoogle: 35,
+      channelMeta: 25,
+      channelTikTok: 15,
+      channelSEO: 20,
+      channelReferral: 5,
+      aov: 300,
+      platformFee: 20,
+      ongoingAdSplit: 30,
+      profitMargin: 40,
+      demandRate: 0.25,
+      irConversion: 42
+    };
+
+    // Market size modifiers
+    function getMarketModifier(pop) {
+      if (pop < 400000) return { modifier: 0.85, label: '×0.85 (Small Metro)', class: 'low' };
+      if (pop < 1200000) return { modifier: 1.0, label: '×1.0 (Mid Metro)', class: 'medium' };
+      return { modifier: 1.35, label: '×1.35 (Major Metro)', class: 'high' };
+    }
+
+    function formatCurrency(num) {
+      return '$' + num.toLocaleString('en-US', { maximumFractionDigits: 0 });
+    }
+
+    function formatCurrencyDecimal(num) {
+      return '$' + num.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
+    function toggleCollapsible(id) {
+      const content = document.getElementById(id + 'Content');
+      const chevron = document.getElementById(id + 'Chevron');
+      content.classList.toggle('open');
+      chevron.classList.toggle('open');
+    }
+
+    function resetDefaults() {
+      Object.entries(defaults).forEach(([key, value]) => {
+        const el = document.getElementById(key);
+        if (el) el.value = value;
+      });
+      calculate();
+    }
+
+    // Parse URL params on load
+    function loadFromUrl() {
+      const params = new URLSearchParams(window.location.search);
+
+      const paramMap = {
+        'pop': 'population',
+        'type': 'areaType',
+        'tier': 'partnerTier',
+        'ads': 'adSplit',
+        'aov': 'aov',
+        'fee': 'platformFee',
+        'margin': 'profitMargin',
+        'demand': 'demandRate',
+        'conv': 'irConversion'
+      };
+
+      Object.entries(paramMap).forEach(([param, inputId]) => {
+        const value = params.get(param);
+        if (value) {
+          const el = document.getElementById(inputId);
+          if (el) el.value = value;
+        }
+      });
+    }
+
+    // Generate share URL
+    function generateShareUrl() {
+      const base = window.location.origin + window.location.pathname;
+      const params = new URLSearchParams();
+
+      params.set('pop', document.getElementById('population').value);
+      params.set('type', document.getElementById('areaType').value);
+      params.set('tier', document.getElementById('partnerTier').value);
+      params.set('ads', document.getElementById('adSplit').value);
+      params.set('aov', document.getElementById('aov').value);
+      params.set('fee', document.getElementById('platformFee').value);
+      params.set('margin', document.getElementById('profitMargin').value);
+
+      return base + '?' + params.toString();
+    }
+
+    function openShareModal() {
+      document.getElementById('shareUrl').value = generateShareUrl();
+      document.getElementById('shareModal').classList.add('open');
+    }
+
+    function closeShareModal() {
+      document.getElementById('shareModal').classList.remove('open');
+    }
+
+    function copyShareUrl() {
+      const input = document.getElementById('shareUrl');
+      input.select();
+      document.execCommand('copy');
+
+      const toast = document.getElementById('toast');
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2000);
+    }
+
+    function calculate() {
+      // Get values
+      const population = parseInt(document.getElementById('population').value) || 150000;
+      const rate = parseFloat(document.getElementById('areaType').value) || 0.08;
+      const tierMultiplier = parseFloat(document.getElementById('partnerTier').value) || 0.5;
+      const adSplitPct = parseInt(document.getElementById('adSplit').value) / 100;
+      const aov = parseInt(document.getElementById('aov').value) || 300;
+      const platformFeePct = parseInt(document.getElementById('platformFee').value) / 100;
+      const ongoingAdSplitPct = parseInt(document.getElementById('ongoingAdSplit').value) / 100;
+      const profitMarginPct = parseInt(document.getElementById('profitMargin').value) / 100;
+      const demandRate = parseFloat(document.getElementById('demandRate').value) / 100;
+      const irConversion = parseInt(document.getElementById('irConversion').value) / 100;
+
+      // Channel weights
+      const channelWeights = {
+        google: parseInt(document.getElementById('channelGoogle').value) || 35,
+        meta: parseInt(document.getElementById('channelMeta').value) || 25,
+        tiktok: parseInt(document.getElementById('channelTikTok').value) || 15,
+        seo: parseInt(document.getElementById('channelSEO').value) || 20,
+        referral: parseInt(document.getElementById('channelReferral').value) || 5
+      };
+      const totalWeight = Object.values(channelWeights).reduce((a, b) => a + b, 0) || 1;
+
+      // Update slider displays
+      document.getElementById('adSplitDisplay').textContent = Math.round(adSplitPct * 100) + '%';
+      document.getElementById('aovDisplay').textContent = formatCurrency(aov);
+      document.getElementById('platformFeeDisplay').textContent = Math.round(platformFeePct * 100) + '%';
+      document.getElementById('ongoingAdSplitDisplay').textContent = Math.round(ongoingAdSplitPct * 100) + '%';
+      document.getElementById('profitMarginDisplay').textContent = Math.round(profitMarginPct * 100) + '%';
+      document.getElementById('demandRateDisplay').textContent = (demandRate * 100).toFixed(2) + '%';
+      document.getElementById('irConversionDisplay').textContent = Math.round(irConversion * 100) + '%';
+
+      // Update channel displays
+      document.getElementById('channelGoogleDisplay').textContent = Math.round(channelWeights.google / totalWeight * 100) + '%';
+      document.getElementById('channelMetaDisplay').textContent = Math.round(channelWeights.meta / totalWeight * 100) + '%';
+      document.getElementById('channelTikTokDisplay').textContent = Math.round(channelWeights.tiktok / totalWeight * 100) + '%';
+      document.getElementById('channelSEODisplay').textContent = Math.round(channelWeights.seo / totalWeight * 100) + '%';
+      document.getElementById('channelReferralDisplay').textContent = Math.round(channelWeights.referral / totalWeight * 100) + '%';
+
+      // Calculate blended CAC
+      let blendedCAC = 0;
+      blendedCAC += (channelWeights.google / totalWeight) * CHANNEL_CAC.google;
+      blendedCAC += (channelWeights.meta / totalWeight) * CHANNEL_CAC.meta;
+      blendedCAC += (channelWeights.tiktok / totalWeight) * CHANNEL_CAC.tiktok;
+      blendedCAC += (channelWeights.seo / totalWeight) * CHANNEL_CAC.seo;
+      blendedCAC += (channelWeights.referral / totalWeight) * CHANNEL_CAC.referral;
+
+      // Market modifier
+      const marketMod = getMarketModifier(population);
+      const adjustedCAC = blendedCAC * marketMod.modifier;
+
+      // Update CAC displays
+      document.getElementById('blendedCAC').textContent = formatCurrencyDecimal(blendedCAC);
+      const marketModEl = document.getElementById('marketModifier');
+      marketModEl.textContent = marketMod.label;
+      marketModEl.className = 'value ' + marketMod.class;
+      document.getElementById('adjustedCAC').textContent = formatCurrencyDecimal(adjustedCAC);
+      document.getElementById('cacResult').textContent = formatCurrencyDecimal(adjustedCAC);
+
+      // Calculate territory fee
+      const fullPrice = population * rate;
+      const territoryFee = fullPrice * tierMultiplier;
+      const adBudget = territoryFee * adSplitPct;
+      const irMarginTerritory = territoryFee * (1 - adSplitPct);
+
+      // Calculate initial campaign results
+      const estOrders = Math.floor(adBudget / adjustedCAC);
+      const partnerGrossRevenue = estOrders * aov;
+      const partnerNetRevenue = partnerGrossRevenue * (1 - platformFeePct);
+      const partnerROI = partnerNetRevenue / territoryFee;
+
+      // Calculate profit-based metrics
+      const partnerProfit = partnerNetRevenue * profitMarginPct;
+      const partnerProfitROI = partnerProfit / territoryFee;
+
+      // Calculate annual demand
+      const annualDemand = Math.round(population * demandRate);
+      const irAddressable = Math.round(annualDemand * irConversion);
+      const annualPartnerPotential = irAddressable * aov * (1 - platformFeePct);
+
+      // Payback period
+      const monthlyOrders = irAddressable / 12 || estOrders / 12;
+      const monthlyProfit = monthlyOrders * aov * (1 - platformFeePct) * profitMarginPct;
+      const paybackMonths = monthlyProfit > 0 ? Math.ceil(territoryFee / monthlyProfit) : 999;
+
+      // Per-order breakdown
+      const partnerPerOrder = aov * (1 - platformFeePct);
+      const platformFeePerOrder = aov * platformFeePct;
+      const irMarginPerOrder = platformFeePerOrder * (1 - ongoingAdSplitPct);
+      const ongoingAdsPerOrder = platformFeePerOrder * ongoingAdSplitPct;
+
+      // Percentages for bar
+      const partnerPct = (1 - platformFeePct) * 100;
+      const irPct = platformFeePct * (1 - ongoingAdSplitPct) * 100;
+      const adsPct = platformFeePct * ongoingAdSplitPct * 100;
+
+      // Monthly projections
+      const monthly10Partner = 10 * partnerPerOrder;
+      const monthly20Partner = 20 * partnerPerOrder;
+      const monthly20IR = 20 * irMarginPerOrder;
+      const monthly20Ads = 20 * ongoingAdsPerOrder;
+
+      // Update UI
+      document.getElementById('territoryFee').textContent = formatCurrency(territoryFee);
+      document.getElementById('fullPriceNote').textContent = 'Full: ' + formatCurrency(fullPrice);
+      document.getElementById('adBudget').textContent = formatCurrency(adBudget);
+      document.getElementById('adBudgetPercent').textContent = Math.round(adSplitPct * 100) + '% of fee';
+      document.getElementById('irMarginTerritory').textContent = formatCurrency(irMarginTerritory);
+
+      document.getElementById('estOrders').textContent = estOrders;
+      document.getElementById('partnerRevenue').textContent = formatCurrency(partnerNetRevenue);
+      document.getElementById('partnerRevenueCalc').textContent = estOrders + ' × ' + formatCurrency(aov) + ' × ' + Math.round((1 - platformFeePct) * 100) + '%';
+      document.getElementById('partnerProfit').textContent = formatCurrency(partnerProfit);
+      document.getElementById('partnerProfitCalc').textContent = Math.round(profitMarginPct * 100) + '% margin';
+      document.getElementById('partnerProfitROI').textContent = partnerProfitROI.toFixed(1) + 'x';
+      document.getElementById('partnerROI').textContent = partnerROI.toFixed(1) + 'x';
+
+      // Payback
+      let paybackText = paybackMonths <= 1 ? '< 1 month' : paybackMonths <= 24 ? '~' + paybackMonths + ' months' : '> 2 years';
+      document.getElementById('paybackPeriod').textContent = paybackText;
+      document.getElementById('paybackCalc').textContent = formatCurrency(monthlyProfit) + '/mo profit';
+
+      // Annual demand
+      document.getElementById('annualDemand').textContent = annualDemand.toLocaleString();
+      document.getElementById('irAddressable').textContent = irAddressable.toLocaleString();
+      document.getElementById('annualPartnerPotential').textContent = formatCurrency(annualPartnerPotential);
+      document.getElementById('annualPartnerProfit').textContent = formatCurrency(annualPartnerPotential * profitMarginPct);
+      document.getElementById('annualProfitCalc').textContent = 'at ' + Math.round(profitMarginPct * 100) + '% margin';
+
+      // Funnel
+      document.getElementById('funnelPop').textContent = population.toLocaleString();
+      document.getElementById('funnelDemand').textContent = annualDemand.toLocaleString() + ' jobs';
+      document.getElementById('funnelDemand').style.width = Math.max(10, demandRate * 100 * 150) + '%';
+      document.getElementById('funnelIR').textContent = irAddressable.toLocaleString() + ' jobs';
+      document.getElementById('funnelIR').style.width = Math.max(5, demandRate * irConversion * 100 * 150) + '%';
+
+      // Bar chart
+      document.getElementById('orderValueLabel').textContent = aov;
+      document.getElementById('partnerBar').style.width = partnerPct + '%';
+      document.getElementById('partnerBar').textContent = formatCurrency(partnerPerOrder);
+      document.getElementById('irBar').style.width = irPct + '%';
+      document.getElementById('irBar').textContent = irPct > 8 ? formatCurrency(irMarginPerOrder) : '';
+      document.getElementById('adsBar').style.width = adsPct + '%';
+      document.getElementById('adsBar').textContent = adsPct > 8 ? formatCurrency(ongoingAdsPerOrder) : '';
+
+      // Legend
+      document.getElementById('partnerPercent').textContent = partnerPct.toFixed(0);
+      document.getElementById('irPercent').textContent = irPct.toFixed(0);
+      document.getElementById('adsPercent').textContent = adsPct.toFixed(0);
+
+      // Monthly
+      document.getElementById('monthly10').textContent = formatCurrency(monthly10Partner);
+      document.getElementById('monthly10Profit').textContent = formatCurrency(monthly10Partner * profitMarginPct) + ' profit';
+      document.getElementById('monthly20').textContent = formatCurrency(monthly20Partner);
+      document.getElementById('monthly20Profit').textContent = formatCurrency(monthly20Partner * profitMarginPct) + ' profit';
+      document.getElementById('irMonthly20').textContent = formatCurrency(monthly20IR);
+      document.getElementById('adFund20').textContent = formatCurrency(monthly20Ads);
+
+      // Breakdown
+      document.getElementById('breakPop').textContent = population.toLocaleString();
+      document.getElementById('breakRate').textContent = '$' + rate.toFixed(2);
+      document.getElementById('breakFull').textContent = formatCurrency(fullPrice);
+      document.getElementById('breakDiscount').textContent = ((1 - tierMultiplier) * 100) + '%';
+      document.getElementById('breakPays').textContent = formatCurrency(territoryFee);
+      document.getElementById('breakAds').textContent = formatCurrency(adBudget);
+      document.getElementById('breakIR').textContent = formatCurrency(irMarginTerritory);
+      document.getElementById('breakBlendedCAC').textContent = formatCurrencyDecimal(blendedCAC);
+      document.getElementById('breakMarketMod').textContent = marketMod.label;
+      document.getElementById('breakAdjustedCAC').textContent = formatCurrencyDecimal(adjustedCAC);
+      document.getElementById('breakOrders').textContent = estOrders;
+      document.getElementById('breakPartnerGross').textContent = formatCurrency(partnerGrossRevenue);
+      document.getElementById('breakPartnerNet').textContent = formatCurrency(partnerNetRevenue);
+      document.getElementById('breakProfitMargin').textContent = Math.round(profitMarginPct * 100) + '%';
+      document.getElementById('breakPartnerProfit').textContent = formatCurrency(partnerProfit);
+      document.getElementById('breakROI').textContent = partnerROI.toFixed(1) + 'x';
+      document.getElementById('breakProfitROI').textContent = partnerProfitROI.toFixed(1) + 'x';
+    }
+
+    // Add event listeners
+    const inputs = document.querySelectorAll('input, select');
+    inputs.forEach(input => {
+      input.addEventListener('input', calculate);
+      input.addEventListener('change', calculate);
+    });
+
+    // Close modal on outside click
+    document.getElementById('shareModal').addEventListener('click', function(e) {
+      if (e.target === this) closeShareModal();
+    });
+
+    // Initialize
+    loadFromUrl();
+    calculate();
+  </script>
+</body>
+</html>

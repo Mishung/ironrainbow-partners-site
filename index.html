@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Iron Rainbow Partner Network</title>
+  <title>Iron Rainbow Partner Network - Powder Coating Partners</title>
+  <meta name="description" content="Join Iron Rainbow's network of powder coating professionals. Receive qualified customers, grow your business, and earn 80% of every order.">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌈</text></svg>">
   <style>
     * {
@@ -12,173 +13,466 @@
       box-sizing: border-box;
     }
 
+    :root {
+      --gold: #ffd60a;
+      --gold-dim: #ff9500;
+      --bg-1: #1a1a2e;
+      --bg-2: #16213e;
+      --text-1: #ffffff;
+      --text-2: #a0a0a0;
+      --green: #4ade80;
+      --border: rgba(255, 255, 255, 0.1);
+    }
+
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      background: linear-gradient(135deg, var(--bg-1) 0%, var(--bg-2) 100%);
       min-height: 100vh;
+      color: var(--text-1);
+    }
+
+    /* Header */
+    .header {
+      padding: 20px 40px;
       display: flex;
-      flex-direction: column;
+      justify-content: space-between;
       align-items: center;
-      justify-content: center;
-      color: #fff;
-      padding: 20px;
+      border-bottom: 1px solid var(--border);
     }
 
-    .container {
-      max-width: 600px;
-      text-align: center;
+    .header-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
     }
 
-    .logo {
-      font-size: 48px;
-      margin-bottom: 20px;
+    .header-brand .logo {
+      font-size: 32px;
     }
 
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 10px;
-      background: linear-gradient(90deg, #ffd60a, #ff9500);
+    .header-brand h1 {
+      font-size: 1.5rem;
+      background: linear-gradient(90deg, var(--gold), var(--gold-dim));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
 
-    .tagline {
+    .header-nav {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .header-nav a {
+      color: var(--text-2);
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+
+    .header-nav a:hover {
+      color: var(--text-1);
+    }
+
+    .btn {
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+      border: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(90deg, var(--gold), var(--gold-dim));
+      color: var(--bg-1);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(255, 214, 10, 0.3);
+    }
+
+    /* Hero */
+    .hero {
+      padding: 80px 40px 60px;
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero h2 {
+      font-size: 3rem;
+      line-height: 1.2;
+      margin-bottom: 24px;
+    }
+
+    .hero h2 span {
+      background: linear-gradient(90deg, var(--gold), var(--gold-dim));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      color: var(--text-2);
+      line-height: 1.7;
+      margin-bottom: 40px;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-1);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: var(--text-2);
+    }
+
+    /* Stats */
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 60px;
+      padding: 40px 20px;
+      flex-wrap: wrap;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--gold);
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      color: var(--text-2);
+      margin-top: 4px;
+    }
+
+    /* How It Works */
+    .section {
+      padding: 80px 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 48px;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 32px;
+    }
+
+    .step {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      text-align: center;
+    }
+
+    .step-number {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-dim));
+      color: var(--bg-1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin: 0 auto 20px;
+    }
+
+    .step h3 {
       font-size: 1.2rem;
-      color: #a0a0a0;
-      margin-bottom: 40px;
+      margin-bottom: 12px;
     }
 
-    .description {
+    .step p {
+      color: var(--text-2);
+      line-height: 1.6;
+    }
+
+    /* Benefits */
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+    }
+
+    .benefit {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .benefit-icon {
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .benefit h4 {
+      font-size: 1rem;
+      margin-bottom: 8px;
+      color: var(--gold);
+    }
+
+    .benefit p {
+      color: var(--text-2);
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    /* Calculator CTA */
+    .calc-cta {
+      background: rgba(255, 214, 10, 0.05);
+      border: 1px solid rgba(255, 214, 10, 0.2);
+      border-radius: 16px;
+      padding: 48px;
+      text-align: center;
+      margin: 60px auto;
+      max-width: 800px;
+    }
+
+    .calc-cta h3 {
+      font-size: 1.75rem;
+      margin-bottom: 16px;
+    }
+
+    .calc-cta p {
+      color: var(--text-2);
+      margin-bottom: 24px;
       font-size: 1.1rem;
-      line-height: 1.8;
-      color: #d0d0d0;
-      margin-bottom: 40px;
     }
 
+    /* Services */
     .services {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       gap: 12px;
-      margin-bottom: 40px;
+      padding: 20px 0;
     }
 
     .service-tag {
       background: rgba(255, 214, 10, 0.1);
       border: 1px solid rgba(255, 214, 10, 0.3);
-      color: #ffd60a;
+      color: var(--gold);
       padding: 8px 16px;
       border-radius: 20px;
       font-size: 0.9rem;
     }
 
-    .cta-button {
-      display: inline-block;
-      background: linear-gradient(90deg, #ffd60a, #ff9500);
-      color: #1a1a2e;
-      text-decoration: none;
-      padding: 16px 40px;
-      border-radius: 30px;
-      font-weight: 600;
-      font-size: 1.1rem;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-
-    .cta-button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 30px rgba(255, 214, 10, 0.3);
-    }
-
-    .benefits {
-      margin-top: 60px;
-      text-align: left;
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 16px;
-      padding: 30px;
-    }
-
-    .benefits h2 {
-      font-size: 1.3rem;
-      margin-bottom: 20px;
-      color: #ffd60a;
-    }
-
-    .benefits ul {
-      list-style: none;
-    }
-
-    .benefits li {
-      padding: 10px 0;
-      color: #d0d0d0;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .benefits li::before {
-      content: "✓";
-      color: #34c759;
-      font-weight: bold;
-    }
-
-    footer {
-      margin-top: 60px;
-      color: #606060;
-      font-size: 0.85rem;
+    /* Footer */
+    .footer {
       text-align: center;
-      line-height: 1.8;
+      padding: 40px 20px;
+      color: var(--text-2);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--border);
+      margin-top: 60px;
     }
 
-    footer a {
-      color: #ffd60a;
+    .footer a {
+      color: var(--gold);
       text-decoration: none;
     }
 
-    footer a:hover {
+    .footer a:hover {
       text-decoration: underline;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .header {
+        padding: 16px 20px;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .hero {
+        padding: 40px 20px;
+      }
+
+      .hero h2 {
+        font-size: 2rem;
+      }
+
+      .stats {
+        gap: 30px;
+      }
+
+      .section {
+        padding: 40px 20px;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="logo">🌈</div>
-    <h1>Iron Rainbow</h1>
-    <p class="tagline">Partner Network</p>
-
-    <p class="description">
-      We connect customers with trusted powder coating and wheel finishing
-      professionals across the United States. Join our network of quality-focused
-      partners and grow your business.
-    </p>
-
-    <div class="services">
-      <span class="service-tag">Powder Coating</span>
-      <span class="service-tag">Wheel Refinishing</span>
-      <span class="service-tag">Ceramic Coating</span>
-      <span class="service-tag">Sandblasting</span>
-      <span class="service-tag">Custom Finishes</span>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-brand">
+      <span class="logo">🌈</span>
+      <h1>Iron Rainbow</h1>
     </div>
+    <nav class="header-nav">
+      <a href="#how-it-works">How It Works</a>
+      <a href="#benefits">Benefits</a>
+      <a href="calculator.html">ROI Calculator</a>
+      <a href="mailto:partners@ironrainbow.com" class="btn btn-primary">Become a Partner</a>
+    </nav>
+  </header>
 
-    <a href="https://ironrainbow.com" class="cta-button">Visit Iron Rainbow</a>
-
-    <div class="benefits">
-      <h2>Why Partner With Us?</h2>
-      <ul>
-        <li>Receive qualified customer referrals in your area</li>
-        <li>No fees or commissions - we send you business</li>
-        <li>Join a network of quality-focused professionals</li>
-        <li>Get featured on our platform</li>
-      </ul>
+  <!-- Hero -->
+  <section class="hero">
+    <h2>Grow Your Powder Coating Business with <span>Zero Customer Acquisition Cost</span></h2>
+    <p>Iron Rainbow brings you qualified customers ready to pay. You do what you do best — coat. We handle the marketing, booking, and payment processing.</p>
+    <div class="hero-cta">
+      <a href="calculator.html" class="btn btn-primary">Calculate Your ROI</a>
+      <a href="mailto:partners@ironrainbow.com" class="btn btn-secondary">Contact Us</a>
     </div>
+  </section>
 
-    <footer>
-      <p>&copy; 2025 Iron Rainbow. All rights reserved.</p>
-      <p>
-        <a href="https://ironrainbow.com">ironrainbow.com</a> ·
-        San Diego, California
-      </p>
-    </footer>
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-value">80%</div>
+      <div class="stat-label">You keep on every order</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value">$0</div>
+      <div class="stat-label">Monthly fees</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value">~2x</div>
+      <div class="stat-label">Profit ROI on territory fee</div>
+    </div>
   </div>
+
+  <!-- How It Works -->
+  <section class="section" id="how-it-works">
+    <h2 class="section-title">How It Works</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-number">1</div>
+        <h3>Join the Network</h3>
+        <p>Pay a one-time territory fee based on your area's population. 50% goes directly to marketing in your territory.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">2</div>
+        <h3>We Send Customers</h3>
+        <p>Customers use our 3D configurator to design their order, pick colors, and pay. Orders flow to you automatically.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">3</div>
+        <h3>You Coat, We Pay</h3>
+        <p>Complete the work, mark it done. You keep 80% of every order. No invoicing, no chasing payments.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <div class="services">
+    <span class="service-tag">Powder Coating</span>
+    <span class="service-tag">Wheel Refinishing</span>
+    <span class="service-tag">Ceramic Coating</span>
+    <span class="service-tag">Sandblasting</span>
+    <span class="service-tag">Custom Finishes</span>
+  </div>
+
+  <!-- Benefits -->
+  <section class="section" id="benefits">
+    <h2 class="section-title">Why Partners Love Iron Rainbow</h2>
+    <div class="benefits-grid">
+      <div class="benefit">
+        <div class="benefit-icon">💰</div>
+        <div>
+          <h4>No Monthly Fees</h4>
+          <p>One-time territory fee only. No subscriptions, no hidden costs. Your territory is yours.</p>
+        </div>
+      </div>
+      <div class="benefit">
+        <div class="benefit-icon">📱</div>
+        <div>
+          <h4>No Marketing Needed</h4>
+          <p>We run Google, Meta, TikTok, and SEO campaigns in your area. You just focus on coating.</p>
+        </div>
+      </div>
+      <div class="benefit">
+        <div class="benefit-icon">💳</div>
+        <div>
+          <h4>Payment Handled</h4>
+          <p>Customers pay upfront through our platform. No invoicing, no collections, no hassle.</p>
+        </div>
+      </div>
+      <div class="benefit">
+        <div class="benefit-icon">📊</div>
+        <div>
+          <h4>Operations Software</h4>
+          <p>Our Flex platform handles scheduling, customer communication, and order tracking.</p>
+        </div>
+      </div>
+      <div class="benefit">
+        <div class="benefit-icon">🎯</div>
+        <div>
+          <h4>Qualified Leads Only</h4>
+          <p>Customers configure and pay before you see them. No tire-kickers, no quotes that go nowhere.</p>
+        </div>
+      </div>
+      <div class="benefit">
+        <div class="benefit-icon">🚀</div>
+        <div>
+          <h4>Founding Partner Perks</h4>
+          <p>First partner in each state gets 50% off territory fees. Early movers win.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Calculator CTA -->
+  <div class="calc-cta">
+    <h3>See Your Potential Return</h3>
+    <p>Use our ROI calculator to see exactly what joining Iron Rainbow could mean for your business.</p>
+    <a href="calculator.html" class="btn btn-primary">Open ROI Calculator</a>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2025 Iron Rainbow. All rights reserved.</p>
+    <p style="margin-top: 8px;">
+      <a href="https://ironrainbow.com">ironrainbow.com</a> ·
+      <a href="mailto:partners@ironrainbow.com">partners@ironrainbow.com</a> ·
+      San Diego, California
+    </p>
+  </footer>
 </body>
 </html>
