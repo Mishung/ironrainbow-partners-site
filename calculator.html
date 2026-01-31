@@ -6,6 +6,9 @@
   <title>Partner ROI Calculator - Iron Rainbow</title>
   <meta name="description" content="Calculate your potential return on investment as an Iron Rainbow powder coating partner.">
 
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
   <!-- Favicons -->
   <link rel="icon" type="image/png" sizes="32x32" href="favicon/32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="favicon/16x16.png">
@@ -668,7 +671,7 @@
     </a>
     <div class="header-actions">
       <button class="btn btn-secondary" onclick="openShareModal()">
-        📤 Share This Calculator
+        <i class="fas fa-share-nodes"></i> Share This Calculator
       </button>
       <a href="/" class="btn btn-secondary">← Back</a>
     </div>
@@ -847,7 +850,7 @@
           </div>
         </div>
 
-        <h3 class="section-title">🎯 Initial Campaign (from territory fee)</h3>
+        <h3 class="section-title"><i class="fas fa-crosshairs" style="color: var(--green);"></i> Initial Campaign (from territory fee)</h3>
 
         <div class="results-grid four-col">
           <div class="result-card blue">
@@ -890,7 +893,7 @@
           </div>
         </div>
 
-        <h3 class="section-title">📊 Annual Market Potential</h3>
+        <h3 class="section-title"><i class="fas fa-chart-bar" style="color: var(--gold);"></i> Annual Market Potential</h3>
 
         <div class="demand-visual">
           <div class="funnel-step">
@@ -930,7 +933,7 @@
           </div>
         </div>
 
-        <h3 class="section-title">💰 Per-Order Revenue Split</h3>
+        <h3 class="section-title"><i class="fas fa-dollar-sign" style="color: var(--gold);"></i> Per-Order Revenue Split</h3>
 
         <div class="bar-row">
           <div class="bar-label">$<span id="orderValueLabel">300</span> order</div>
@@ -956,7 +959,7 @@
           </div>
         </div>
 
-        <h3 class="section-title">📅 Monthly Projections (Ongoing)</h3>
+        <h3 class="section-title"><i class="fas fa-calendar" style="color: var(--green);"></i> Monthly Projections (Ongoing)</h3>
 
         <div class="results-grid four-col">
           <div class="result-card">
@@ -981,7 +984,7 @@
           </div>
         </div>
 
-        <h3 class="section-title">📋 Full Breakdown</h3>
+        <h3 class="section-title"><i class="fas fa-clipboard-list" style="color: var(--gold);"></i> Full Breakdown</h3>
 
         <div class="card" style="margin-bottom: 0;">
           <div class="breakdown">
@@ -1074,7 +1077,7 @@
   <!-- Share Modal -->
   <div class="modal-overlay" id="shareModal">
     <div class="modal">
-      <h3>📤 Share This Calculator</h3>
+      <h3><i class="fas fa-share-nodes"></i> Share This Calculator</h3>
       <p>Copy this link to share the calculator with your current settings:</p>
       <div class="share-url">
         <input type="text" id="shareUrl" readonly>
