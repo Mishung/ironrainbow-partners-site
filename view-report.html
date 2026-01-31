@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Market Position Report | Iron Rainbow Partner Network</title>
+  <meta name="description" content="Your personalized Market Position Report - See your digital presence score, growth opportunities, and revenue potential with Iron Rainbow.">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon/32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon/16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon/180x180.png">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --color-primary: #ffd60a;
+      --color-primary-hover: #e6c109;
+      --bg-color-1: #1a1a1a;
+      --bg-color-2: #2a2a2a;
+      --bg-color-3: #3a3a3a;
+      --text-color-primary: hsla(0, 0%, 100%, 1);
+      --text-color-secondary: hsla(0, 0%, 80%, 1);
+      --text-color-tertiary: hsla(0, 0%, 60%, 1);
+      --ir-border: rgba(255, 255, 255, 0.1);
+      --ir-card-bg: rgba(255, 255, 255, 0.05);
+      --green: #4ade80;
+      --red: #ef4444;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background-color: var(--bg-color-1);
+      color: var(--text-color-primary);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* Loading State */
+    .loading-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 80vh;
+      padding: 32px;
+    }
+
+    .loading-spinner {
+      width: 64px;
+      height: 64px;
+      border: 4px solid var(--ir-border);
+      border-top-color: var(--color-primary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-bottom: 24px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .loading-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .loading-subtitle {
+      color: var(--text-color-secondary);
+    }
+
+    /* Error State */
+    .error-container {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 80vh;
+      padding: 32px;
+      text-align: center;
+    }
+
+    .error-icon {
+      font-size: 64px;
+      color: var(--red);
+      margin-bottom: 24px;
+    }
+
+    .error-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .error-message {
+      color: var(--text-color-secondary);
+      margin-bottom: 24px;
+      max-width: 400px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .btn--primary {
+      background: var(--color-primary);
+      color: #1a1a1a;
+    }
+
+    .btn--primary:hover {
+      background: var(--color-primary-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(255, 214, 10, 0.3);
+    }
+
+    .btn--secondary {
+      background: var(--ir-card-bg);
+      color: var(--text-color-primary);
+      border: 1px solid var(--ir-border);
+    }
+
+    .btn--secondary:hover {
+      background: var(--bg-color-3);
+    }
+
+    /* Report Container */
+    .report-container {
+      display: none;
+    }
+
+    .report-container.active {
+      display: block;
+    }
+
+    /* Report Frame */
+    .report-frame {
+      width: 100%;
+      min-height: 100vh;
+      border: none;
+    }
+
+    /* Footer Actions */
+    .report-actions {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      padding: 32px;
+      background: var(--bg-color-2);
+      border-top: 1px solid var(--ir-border);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Loading State -->
+  <div id="loading-state" class="loading-container">
+    <div class="loading-spinner"></div>
+    <h1 class="loading-title">Loading Your Report...</h1>
+    <p class="loading-subtitle">Fetching your personalized Market Position Report</p>
+  </div>
+
+  <!-- Error State -->
+  <div id="error-state" class="error-container">
+    <div class="error-icon"><i class="fas fa-exclamation-circle"></i></div>
+    <h1 class="error-title">Report Not Found</h1>
+    <p class="error-message" id="error-message">We couldn't find a report for this shop. The link may be incorrect or the report may have expired.</p>
+    <div style="display: flex; gap: 16px; flex-wrap: wrap; justify-content: center;">
+      <a href="/report.html" class="btn btn--primary">
+        <i class="fas fa-file-alt"></i>
+        Generate New Report
+      </a>
+      <a href="/" class="btn btn--secondary">
+        <i class="fas fa-home"></i>
+        Back to Home
+      </a>
+    </div>
+  </div>
+
+  <!-- Report Container -->
+  <div id="report-container" class="report-container">
+    <iframe id="report-frame" class="report-frame"></iframe>
+    <div class="report-actions">
+      <a id="pdf-btn" href="#" class="btn btn--primary" target="_blank">
+        <i class="fas fa-file-pdf"></i>
+        Download PDF
+      </a>
+      <button class="btn btn--secondary" onclick="window.print()">
+        <i class="fas fa-print"></i>
+        Print
+      </button>
+      <a href="/calculator.html" class="btn btn--primary">
+        <i class="fas fa-calculator"></i>
+        Calculate Your ROI
+      </a>
+    </div>
+  </div>
+
+  <script>
+    // Configuration - Update API_BASE when deploying partner-tools
+    const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+      ? 'http://localhost:3333'
+      : 'https://partner-tools.up.railway.app';
+
+    // Get slug from URL
+    function getSlug() {
+      // Try query param first: ?s=slug or ?slug=slug
+      const params = new URLSearchParams(window.location.search);
+      const slug = params.get('s') || params.get('slug');
+      if (slug) return slug;
+
+      // Try hash: #slug
+      if (window.location.hash) {
+        return window.location.hash.slice(1);
+      }
+
+      // Try path segment: /view-report/slug (won't work on GitHub Pages, but for completeness)
+      const pathMatch = window.location.pathname.match(/\/view-report\/([^\/]+)/);
+      if (pathMatch) return pathMatch[1];
+
+      return null;
+    }
+
+    // Show error state
+    function showError(message) {
+      document.getElementById('loading-state').style.display = 'none';
+      document.getElementById('error-state').style.display = 'flex';
+      if (message) {
+        document.getElementById('error-message').textContent = message;
+      }
+    }
+
+    // Load and display report
+    async function loadReport() {
+      const slug = getSlug();
+
+      if (!slug) {
+        showError('No report specified. Please check the link you received.');
+        return;
+      }
+
+      try {
+        const response = await fetch(`${API_BASE}/api/report/${slug}`);
+
+        if (!response.ok) {
+          if (response.status === 404) {
+            showError(`We couldn't find a report for "${slug}". The shop may not be in our system yet.`);
+          } else {
+            showError('There was an error loading your report. Please try again later.');
+          }
+          return;
+        }
+
+        const html = await response.text();
+
+        // Show report
+        document.getElementById('loading-state').style.display = 'none';
+        document.getElementById('report-container').classList.add('active');
+
+        // Set iframe content
+        const frame = document.getElementById('report-frame');
+        frame.srcdoc = html;
+
+        // Update PDF link
+        document.getElementById('pdf-btn').href = `${API_BASE}/api/report/${slug}/pdf`;
+
+        // Update page title with shop name if we can extract it
+        const titleMatch = html.match(/<title>([^<]+)<\/title>/);
+        if (titleMatch) {
+          document.title = titleMatch[1];
+        }
+
+      } catch (err) {
+        console.error('Report load error:', err);
+        showError('Unable to connect to the report server. Please check your internet connection and try again.');
+      }
+    }
+
+    // Initialize
+    loadReport();
+  </script>
+</body>
+</html>
