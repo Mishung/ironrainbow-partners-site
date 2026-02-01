@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Iron Rainbow Service Partner - Join Our Network</title>
+  <meta name="description" content="Become an Iron Rainbow service partner. Receive customers when they need tire mounting, wheel repair, and other services. Zero customer acquisition cost.">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon/32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon/16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon/180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="favicon/192x192.png">
+
+  <style>
+    /* === IRON RAINBOW DESIGN SYSTEM === */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --color-primary: #ffd60a;
+      --color-primary-hover: #e6c109;
+      --bg-color-1: #1a1a1a;
+      --bg-color-2: #2a2a2a;
+      --bg-color-3: #3a3a3a;
+      --text-color-primary: hsla(0, 0%, 100%, 1);
+      --text-color-secondary: hsla(0, 0%, 80%, 1);
+      --text-color-tertiary: hsla(0, 0%, 60%, 1);
+      --font-size-s: 1rem;
+      --font-size-m: 1.125rem;
+      --font-size-l: 1.25rem;
+      --font-size-xl: 1.5rem;
+      --font-size-2xl: 1.75rem;
+      --font-size-3xl: 2rem;
+      --font-size-4xl: 2.5rem;
+      --ir-border: rgba(255, 255, 255, 0.1);
+      --ir-card-bg: rgba(255, 255, 255, 0.05);
+      --ir-card-bg-hover: rgba(255, 255, 255, 0.08);
+      --header-height: 80px;
+      --ir-page-max-width: 900px;
+      --ir-page-horz-padding: 32px;
+      --border-radius-m: 12px;
+      --green: #4ade80;
+      --error: #ef4444;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background-color: var(--bg-color-1);
+      color: var(--text-color-primary);
+      font-size: var(--font-size-s);
+      line-height: 1.5;
+      min-height: 100vh;
+    }
+
+    /* === HEADER === */
+    .site-header-container {
+      background: linear-gradient(135deg, #333 0%, #2a2a2a 50%, #1a1a1a 100%);
+      border-bottom: 2px solid var(--color-primary);
+      height: var(--header-height);
+      padding: 16px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px rgba(246, 213, 92, 0.3);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(10px);
+    }
+    .site-header-inner {
+      max-width: var(--ir-page-max-width);
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .site-header-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+    .site-header-logo img.logo-icon {
+      height: 40px;
+      width: auto;
+    }
+    .site-header-logo img.logo-text {
+      height: 28px;
+      width: auto;
+    }
+
+    /* === MAIN CONTENT === */
+    .main-content {
+      max-width: var(--ir-page-max-width);
+      margin: 0 auto;
+      padding: 60px var(--ir-page-horz-padding) 80px;
+    }
+
+    /* === HERO === */
+    .hero {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .hero__badge {
+      display: inline-block;
+      padding: 8px 16px;
+      background: var(--color-primary);
+      color: var(--bg-color-1);
+      border-radius: 20px;
+      font-size: var(--font-size-s);
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+    .hero__headline {
+      font-size: var(--font-size-4xl);
+      font-weight: 600;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+    .hero__headline .city-name {
+      color: var(--color-primary);
+    }
+    .hero__subheadline {
+      font-size: var(--font-size-l);
+      color: var(--text-color-secondary);
+      line-height: 1.6;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    /* === VALUE PROPS === */
+    .value-props {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+    .value-prop {
+      background: var(--ir-card-bg);
+      border: 1px solid var(--ir-border);
+      border-radius: var(--border-radius-m);
+      padding: 24px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .value-prop__icon {
+      width: 44px;
+      height: 44px;
+      min-width: 44px;
+      background: rgba(255, 214, 10, 0.1);
+      border: 1px solid rgba(255, 214, 10, 0.3);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      color: var(--color-primary);
+    }
+    .value-prop__content h3 {
+      font-size: var(--font-size-m);
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: var(--text-color-primary);
+    }
+    .value-prop__content p {
+      color: var(--text-color-secondary);
+      font-size: var(--font-size-s);
+      line-height: 1.5;
+    }
+
+    /* === FORM === */
+    .signup-form-container {
+      background: var(--ir-card-bg);
+      border: 2px solid var(--color-primary);
+      border-radius: 16px;
+      padding: 40px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .form-title {
+      font-size: var(--font-size-2xl);
+      font-weight: 700;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+    .form-subtitle {
+      color: var(--text-color-secondary);
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text-color-primary);
+    }
+    .form-group label .required {
+      color: var(--error);
+    }
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 14px 16px;
+      font-size: var(--font-size-s);
+      background: var(--bg-color-2);
+      border: 1px solid var(--ir-border);
+      border-radius: 8px;
+      color: var(--text-color-primary);
+      font-family: inherit;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .form-group input:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 3px rgba(255, 214, 10, 0.2);
+    }
+    .form-group input::placeholder {
+      color: var(--text-color-tertiary);
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 16px 32px;
+      font-size: var(--font-size-m);
+      font-weight: 600;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+      background: var(--color-primary);
+      color: black;
+      transition: all 0.3s ease;
+      margin-top: 12px;
+    }
+    .submit-btn:hover {
+      background: var(--color-primary-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 40px rgba(255, 214, 10, 0.3);
+    }
+    .submit-btn:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* === SUCCESS STATE === */
+    .success-message {
+      display: none;
+      text-align: center;
+      padding: 40px 20px;
+    }
+    .success-message.show {
+      display: block;
+    }
+    .success-message .icon {
+      font-size: 4rem;
+      color: var(--green);
+      margin-bottom: 24px;
+    }
+    .success-message h2 {
+      font-size: var(--font-size-2xl);
+      margin-bottom: 12px;
+    }
+    .success-message p {
+      color: var(--text-color-secondary);
+      font-size: var(--font-size-m);
+    }
+
+    /* === ERROR STATE === */
+    .error-message {
+      display: none;
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid var(--error);
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 20px;
+      color: var(--error);
+    }
+    .error-message.show {
+      display: block;
+    }
+
+    /* === FOOTER === */
+    .site-footer {
+      background: var(--bg-color-2);
+      padding: 32px var(--ir-page-horz-padding);
+      text-align: center;
+      border-top: 1px solid var(--ir-border);
+    }
+    .site-footer__copyright {
+      color: var(--text-color-tertiary);
+      font-size: var(--font-size-s);
+    }
+
+    /* === RESPONSIVE === */
+    @media (max-width: 768px) {
+      :root { --ir-page-horz-padding: 24px; }
+      .site-header-container { padding: 16px 24px; }
+      .main-content { padding: 40px 24px 60px; }
+      .hero__headline { font-size: var(--font-size-3xl); }
+      .signup-form-container { padding: 28px 24px; }
+      .form-row { grid-template-columns: 1fr; }
+      .value-props { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="site-header-container">
+    <div class="site-header-inner">
+      <a href="/" class="site-header-logo">
+        <img src="logo/logo-good-size.png" alt="Iron Rainbow" class="logo-icon">
+        <img src="logo/text-horizontal.svg" alt="Iron Rainbow" class="logo-text">
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero__badge">Service Partner Opportunity</div>
+      <h1 class="hero__headline">Iron Rainbow is Coming to <span class="city-name" id="cityDisplay">Your City</span>!</h1>
+      <p class="hero__subheadline">When customers order wheel coating, their wheels come off. That's your moment for tire mounting, balancing, TPMS service, and wheel repair.</p>
+    </section>
+
+    <!-- Value Props -->
+    <section class="value-props">
+      <div class="value-prop">
+        <div class="value-prop__icon"><i class="fas fa-users"></i></div>
+        <div class="value-prop__content">
+          <h3>Customers Come to You</h3>
+          <p>We send pre-paid customers who need tire and wheel services. No marketing required.</p>
+        </div>
+      </div>
+      <div class="value-prop">
+        <div class="value-prop__icon"><i class="fas fa-dollar-sign"></i></div>
+        <div class="value-prop__content">
+          <h3>Zero Acquisition Cost</h3>
+          <p>No fees, no commissions on your services. You keep 100% of what you charge.</p>
+        </div>
+      </div>
+      <div class="value-prop">
+        <div class="value-prop__icon"><i class="fas fa-clock"></i></div>
+        <div class="value-prop__content">
+          <h3>Perfect Timing</h3>
+          <p>Wheels are already off the car. Customers are primed for your services.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Signup Form -->
+    <section class="signup-form-container" id="formContainer">
+      <h2 class="form-title">Get Notified When We Launch</h2>
+      <p class="form-subtitle">We'll reach out when Iron Rainbow is active in your area.</p>
+
+      <div class="error-message" id="errorMessage"></div>
+
+      <form id="signupForm">
+        <div class="form-group">
+          <label for="businessName">Business Name <span class="required">*</span></label>
+          <input type="text" id="businessName" name="businessName" required placeholder="Joe's Tire Shop">
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email <span class="required">*</span></label>
+          <input type="email" id="email" name="email" required placeholder="joe@tireshop.com">
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Phone (optional)</label>
+          <input type="tel" id="phone" name="phone" placeholder="+1-555-123-4567">
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="city">City <span class="required">*</span></label>
+            <input type="text" id="city" name="city" required placeholder="Austin">
+          </div>
+          <div class="form-group">
+            <label for="state">State <span class="required">*</span></label>
+            <input type="text" id="state" name="state" required placeholder="TX" maxlength="2">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="industry">Industry <span class="required">*</span></label>
+          <select id="industry" name="industry" required>
+            <option value="">Select your industry...</option>
+            <option value="tire-shop">Tire Shop</option>
+            <option value="auto-repair">Car Mechanic / Auto Repair</option>
+            <option value="motorcycle-shop">Motorcycle Shop</option>
+            <option value="bicycle-shop">Bicycle Shop</option>
+            <option value="truck-fleet">Truck / Fleet Shop</option>
+            <option value="welding-fabrication">Welding / Fabrication</option>
+            <option value="wheel-repair">Wheel Repair</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <button type="submit" class="submit-btn" id="submitBtn">
+          <i class="fas fa-paper-plane"></i> Sign Up for Updates
+        </button>
+      </form>
+
+      <!-- Success Message -->
+      <div class="success-message" id="successMessage">
+        <div class="icon"><i class="fas fa-check-circle"></i></div>
+        <h2>You're on the list!</h2>
+        <p>We'll reach out when Iron Rainbow launches in your area.</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <p class="site-footer__copyright">© 2025 Iron Rainbow. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Parse URL parameters
+    const params = new URLSearchParams(window.location.search);
+    const cityParam = params.get('city');
+    const stateParam = params.get('state');
+    const industryParam = params.get('industry');
+    const refParam = params.get('ref');
+
+    // Pre-fill form fields from URL params
+    if (cityParam) {
+      document.getElementById('city').value = cityParam;
+      document.getElementById('cityDisplay').textContent = cityParam + (stateParam ? ', ' + stateParam : '');
+    }
+    if (stateParam) {
+      document.getElementById('state').value = stateParam.toUpperCase();
+    }
+    if (industryParam) {
+      const industrySelect = document.getElementById('industry');
+      for (let option of industrySelect.options) {
+        if (option.value === industryParam) {
+          option.selected = true;
+          break;
+        }
+      }
+    }
+
+    // Handle form submission
+    document.getElementById('signupForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const submitBtn = document.getElementById('submitBtn');
+      const errorMessage = document.getElementById('errorMessage');
+      const form = document.getElementById('signupForm');
+      const successMessage = document.getElementById('successMessage');
+
+      // Clear previous errors
+      errorMessage.classList.remove('show');
+      errorMessage.textContent = '';
+
+      // Disable button
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+
+      try {
+        const formData = {
+          businessName: document.getElementById('businessName').value.trim(),
+          email: document.getElementById('email').value.trim(),
+          phone: document.getElementById('phone').value.trim() || null,
+          city: document.getElementById('city').value.trim(),
+          state: document.getElementById('state').value.trim().toUpperCase(),
+          industry: document.getElementById('industry').value,
+          campaignRef: refParam || null
+        };
+
+        const response = await fetch('/api/service-partner-signup', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(formData)
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+          // Show success message
+          form.style.display = 'none';
+          successMessage.classList.add('show');
+        } else {
+          throw new Error(result.error || 'Something went wrong. Please try again.');
+        }
+      } catch (err) {
+        errorMessage.textContent = err.message;
+        errorMessage.classList.add('show');
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Sign Up for Updates';
+      }
+    });
+  </script>
+</body>
+</html>
