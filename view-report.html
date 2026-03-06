@@ -163,6 +163,10 @@
       background: var(--bg-color-2);
       border-top: 1px solid var(--ir-border);
     }
+
+    .report-actions.gated {
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -194,44 +198,53 @@
   <!-- Report Container -->
   <div id="report-container" class="report-container">
     <iframe id="report-frame" class="report-frame"></iframe>
-    <div class="report-actions">
-      <a id="pdf-btn" href="#" class="btn btn--primary" target="_blank">
-        <i class="fas fa-file-pdf"></i>
-        Download PDF
-      </a>
-      <button class="btn btn--secondary" onclick="window.print()">
-        <i class="fas fa-print"></i>
-        Print
-      </button>
-      <a href="/calculator.html" class="btn btn--primary">
-        <i class="fas fa-calculator"></i>
-        Calculate Your ROI
-      </a>
+    <div class="report-actions" style="flex-direction: column; align-items: center; gap: 24px;">
+      <div style="text-align: center; max-width: 600px;">
+        <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 8px; color: var(--text-color-primary);">Ready to claim your territory?</h2>
+        <p style="color: var(--text-color-secondary); margin-bottom: 20px;">Check if your area is available and get started in minutes.</p>
+        <a href="https://ironrainbow.com/partnerships" class="btn btn--primary" style="font-size: 1.125rem; padding: 16px 32px;">
+          <i class="fas fa-map-marker-alt"></i>
+          Check Your Territory
+        </a>
+      </div>
+      <div style="display: flex; gap: 16px; flex-wrap: wrap; justify-content: center;">
+        <a id="pdf-btn" href="#" class="btn btn--secondary" target="_blank">
+          <i class="fas fa-file-pdf"></i>
+          Download PDF
+        </a>
+        <button class="btn btn--secondary" onclick="window.print()">
+          <i class="fas fa-print"></i>
+          Print
+        </button>
+        <a href="/calculator.html" class="btn btn--secondary">
+          <i class="fas fa-calculator"></i>
+          Calculate Your ROI
+        </a>
+      </div>
     </div>
   </div>
 
   <script>
-    // Configuration - Update API_BASE when deploying partner-tools
+    // Configuration
     const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
       ? 'http://localhost:3333'
-      : 'https://partner-tools.up.railway.app';
+      : 'https://partner-tools-api-production.up.railway.app';
+
+    const SIGNUP_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+      ? 'http://localhost:3000'
+      : 'https://signup-api-production-5c59.up.railway.app';
+
+    let currentSlug = null;
+    let reportUnlocked = false;
 
     // Get slug from URL
     function getSlug() {
-      // Try query param first: ?s=slug or ?slug=slug
       const params = new URLSearchParams(window.location.search);
       const slug = params.get('s') || params.get('slug');
       if (slug) return slug;
-
-      // Try hash: #slug
-      if (window.location.hash) {
-        return window.location.hash.slice(1);
-      }
-
-      // Try path segment: /view-report/slug (won't work on GitHub Pages, but for completeness)
+      if (window.location.hash) return window.location.hash.slice(1);
       const pathMatch = window.location.pathname.match(/\/view-report\/([^\/]+)/);
       if (pathMatch) return pathMatch[1];
-
       return null;
     }
 
@@ -244,9 +257,152 @@
       }
     }
 
+    // Apply email gate to iframe content
+    function applyGate(frame) {
+      try {
+        const doc = frame.contentDocument || frame.contentWindow.document;
+        if (!doc) return;
+
+        const sections = doc.querySelectorAll('.report-section');
+        if (sections.length < 4) return; // Not enough sections to gate
+
+        // Blur sections 3+ (0-2 are teaser: Digital Presence, Services, Reputation)
+        const TEASER_COUNT = 3;
+        for (let i = TEASER_COUNT; i < sections.length; i++) {
+          sections[i].style.filter = 'blur(5px)';
+          sections[i].style.pointerEvents = 'none';
+          sections[i].style.userSelect = 'none';
+          sections[i].classList.add('gated-section');
+        }
+
+        // Also blur the CTA section
+        const cta = doc.querySelector('.cta-section');
+        if (cta) {
+          cta.style.filter = 'blur(5px)';
+          cta.style.pointerEvents = 'none';
+          cta.classList.add('gated-section');
+        }
+
+        // Inject gate overlay after the last teaser section
+        const gateCard = doc.createElement('div');
+        gateCard.id = 'report-gate';
+        gateCard.innerHTML = `
+          <div style="
+            background: linear-gradient(135deg, rgba(255,214,10,0.08) 0%, rgba(255,214,10,0.02) 100%);
+            border: 2px solid #ffd60a;
+            border-radius: 16px;
+            padding: 48px 32px;
+            text-align: center;
+            margin: 48px auto 32px;
+            max-width: 560px;
+          ">
+            <div style="font-size: 48px; margin-bottom: 16px;">🔒</div>
+            <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 12px; color: #fff;">
+              Your Full Report is Ready
+            </h2>
+            <p style="color: rgba(255,255,255,0.7); margin-bottom: 28px; font-size: 1rem; line-height: 1.6;">
+              Enter your email to unlock your complete market analysis — competitor map, growth gaps, and revenue projections.
+            </p>
+            <form id="gate-form" style="display: flex; gap: 12px; max-width: 420px; margin: 0 auto 12px;">
+              <input type="email" id="gate-email" placeholder="you@yourshop.com" required style="
+                flex: 1;
+                padding: 14px 16px;
+                border-radius: 8px;
+                border: 1px solid rgba(255,255,255,0.2);
+                background: rgba(255,255,255,0.08);
+                color: #fff;
+                font-size: 1rem;
+                outline: none;
+              " />
+              <button type="submit" style="
+                padding: 14px 24px;
+                background: #ffd60a;
+                color: #1a1a1a;
+                border: none;
+                border-radius: 8px;
+                font-weight: 600;
+                font-size: 1rem;
+                cursor: pointer;
+                white-space: nowrap;
+              ">Unlock Full Report</button>
+            </form>
+            <p style="color: rgba(255,255,255,0.4); font-size: 0.8125rem;">No spam. We'll send you a copy.</p>
+          </div>
+        `;
+
+        // Insert after teaser sections
+        const container = doc.querySelector('.report-container');
+        if (container && sections[TEASER_COUNT]) {
+          container.insertBefore(gateCard, sections[TEASER_COUNT]);
+        }
+
+        // Handle form submit
+        const form = doc.getElementById('gate-form');
+        if (form) {
+          form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = doc.getElementById('gate-email').value;
+            if (email) unlockReport(frame, email);
+          });
+        }
+
+        // Gate the footer action buttons
+        document.querySelector('.report-actions').classList.add('gated');
+
+      } catch (err) {
+        // If iframe access fails (cross-origin), show full report (graceful degradation)
+        console.warn('Gate not applied (iframe access failed):', err);
+      }
+    }
+
+    // Unlock the report after email submission
+    async function unlockReport(frame, email) {
+      // Send lead to signup service
+      try {
+        await fetch(`${SIGNUP_BASE}/api/report-gate-signup`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, partnerSlug: currentSlug })
+        });
+      } catch (err) {
+        console.warn('Lead capture failed:', err);
+      }
+
+      // Remove gate regardless of API success
+      try {
+        const doc = frame.contentDocument || frame.contentWindow.document;
+
+        // Remove blur from all gated sections
+        doc.querySelectorAll('.gated-section').forEach(el => {
+          el.style.filter = '';
+          el.style.pointerEvents = '';
+          el.style.userSelect = '';
+        });
+
+        // Remove gate card
+        const gateCard = doc.getElementById('report-gate');
+        if (gateCard) gateCard.remove();
+
+        // Show footer actions
+        document.querySelector('.report-actions').classList.remove('gated');
+
+        reportUnlocked = true;
+
+        // Scroll to competitor map or next section
+        const mapSection = doc.getElementById('competitor-map');
+        const target = mapSection || doc.querySelectorAll('.report-section')[3];
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      } catch (err) {
+        console.warn('Unlock DOM error:', err);
+      }
+    }
+
     // Load and display report
     async function loadReport() {
       const slug = getSlug();
+      currentSlug = slug;
 
       if (!slug) {
         showError('No report specified. Please check the link you received.');
@@ -278,11 +434,18 @@
         // Update PDF link
         document.getElementById('pdf-btn').href = `${API_BASE}/api/report/${slug}/pdf`;
 
-        // Update page title with shop name if we can extract it
+        // Update page title
         const titleMatch = html.match(/<title>([^<]+)<\/title>/);
         if (titleMatch) {
           document.title = titleMatch[1];
         }
+
+        // Apply gate after iframe loads
+        frame.addEventListener('load', function() {
+          if (!reportUnlocked) {
+            applyGate(frame);
+          }
+        });
 
       } catch (err) {
         console.error('Report load error:', err);
