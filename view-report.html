@@ -248,6 +248,29 @@
       return null;
     }
 
+    // Outreach recipients arrive from an email we already sent them, so the
+    // lead-capture gate has nothing left to capture — it is pure friction at
+    // the moment they are curious. A link carrying ?e=<base64 email> skips the
+    // gate and records the visit instead (2026-08-11).
+    function getInvitedEmail() {
+      const params = new URLSearchParams(window.location.search);
+      const raw = params.get('e') || params.get('email');
+      if (!raw) return null;
+      let value = raw;
+      try { value = atob(raw.replace(/-/g, '+').replace(/_/g, '/')); } catch (err) { /* plain address */ }
+      return /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(value) ? value : null;
+    }
+
+    function recordInvitedVisit(email) {
+      try {
+        fetch(`${SIGNUP_BASE}/api/report-gate-signup`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, partnerSlug: currentSlug, source: 'outreach-link' })
+        }).catch(() => {});
+      } catch (err) { /* never block the report on lead capture */ }
+    }
+
     // Show error state
     function showError(message) {
       document.getElementById('loading-state').style.display = 'none';
@@ -259,6 +282,12 @@
 
     // Apply email gate to iframe content
     function applyGate(frame) {
+      const invited = getInvitedEmail();
+      if (invited) {
+        recordInvitedVisit(invited);
+        reportUnlocked = true;
+        return;                      // full report, no gate
+      }
       try {
         const doc = frame.contentDocument || frame.contentWindow.document;
         if (!doc) return;
